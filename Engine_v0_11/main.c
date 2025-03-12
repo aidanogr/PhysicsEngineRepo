@@ -31,7 +31,6 @@ void printMasses(Universe* universe) {
 
 int main(void) {
     //DELTA_TIME_SECONDS = 0.01;
-    printf("DEltaTimeSeconds: %f\n", DELTA_TIME_SECONDS);
     const float time_of_simulation_seconds = 10;
     const int number_of_iterations = (int) (time_of_simulation_seconds / DELTA_TIME_SECONDS);
 

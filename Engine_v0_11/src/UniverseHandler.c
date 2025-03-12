@@ -10,6 +10,25 @@
 #include "../include/UNIVERSAL_CONSTANTS.h"
 #include "../include/UniverseHandler.h"
 #include "../include/Animate.h"
+
+
+double DELTA_TIME_SECONDS = 0.01;
+double* DELTA_TIME_SECONDS_POINTER = (double* ) (&DELTA_TIME_SECONDS);
+
+/**
+ *
+ * @param delta_time
+ * @return 0 if successful
+ * @return -1 if delta_time is <= 0
+ */
+int set_DELTA_TIME_SECONDS(double delta_time) {
+    if (delta_time <= 0.0) {
+        return -1;
+    }
+    DELTA_TIME_SECONDS = delta_time;
+    return 0;
+}
+
 //MASS HANDLERS
 
 //default mass generator, no energy init

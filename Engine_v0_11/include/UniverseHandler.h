@@ -5,9 +5,7 @@
 #ifndef UNIVERSEHANDLER_H
 #define UNIVERSEHANDLER_H
 
-#ifndef DELTA_TIME_SECONDS
-#define DELTA_TIME_SECONDS 0.01
-#endif
+
 
 typedef struct {
     double vx;
@@ -41,14 +39,24 @@ typedef struct {
 } Vector_List;
 
 
+
+double* DELTA_TIME_SECONDS_POINTER;
+int set_DELTA_TIME_SECONDS(double delta_time);
+
+
+//Universe and Mass Handlers
 void createUniverse(Universe* universe);
 int addMassToUniverse(Universe* universe, Mass* mass);
 Mass createMass(double mass_kg, double charge, double initial_position_m_x, double initial_position_m_y, double initial_position_m_z,
     double initial_velocity_m_per_s_x, double initial_velocity_m_per_s_y, double initial_velocity_m_per_s_z);
 
+
+//Vector Operations
 double distance_between_masses_squared(Mass* first_mass, Mass* second_mass, Vector* vector_between_masses);
 int normalizeVector(Vector* vector);
 
+
+//Force Operations
 int applyGravitationalForce(Universe* universe);
 int applyElectrostaticForce(Universe* universe);
 int applyVelocity(Universe* universe);
