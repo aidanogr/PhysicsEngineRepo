@@ -2,14 +2,14 @@
 // Created by Aidan O'Grady on 3/12/25.
 //
 
-#include "UniverseHandler.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <math.h>
-#include "UNIVERSAL_CONSTANTS.h"
-#include "UniverseHandler.h"
-#include "Animate.h"
+#include "../include/UNIVERSAL_CONSTANTS.h"
+#include "../include/UniverseHandler.h"
+#include "../include/Animate.h"
 //MASS HANDLERS
 
 //default mass generator, no energy init

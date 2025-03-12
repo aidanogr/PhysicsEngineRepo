@@ -6,9 +6,9 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <math.h>
-#include "UNIVERSAL_CONSTANTS.h"
-#include "UniverseHandler.h"
-#include "Animate.h"
+#include "include/UNIVERSAL_CONSTANTS.h"
+#include "include/UniverseHandler.h"
+#include "include/Animate.h"
 
 
 

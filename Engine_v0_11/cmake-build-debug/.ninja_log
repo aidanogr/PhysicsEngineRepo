@@ -1,0 +1,6 @@
+# ninja log v6
+1	74	1741798716147110290	CMakeFiles/Engine.dir/main.c.o	d5a387b9823aabbd
+1	83	1741800126274316499	CMakeFiles/Engine.dir/src/Animate.c.o	724d208770c6a9ec
+2	83	1741800126274775562	CMakeFiles/Engine.dir/main.c.o	d5a387b9823aabbd
+1	85	1741800126274623652	CMakeFiles/Engine.dir/src/UniverseHandler.c.o	2c4c1b23ca7b1604
+86	194	1741800126358723401	Engine	70129a68b51ea93a
