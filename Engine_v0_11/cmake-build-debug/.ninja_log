@@ -1,6 +1,11 @@
 # ninja log v6
-1	74	1741798716147110290	CMakeFiles/Engine.dir/main.c.o	d5a387b9823aabbd
-1	83	1741800126274316499	CMakeFiles/Engine.dir/src/Animate.c.o	724d208770c6a9ec
-2	83	1741800126274775562	CMakeFiles/Engine.dir/main.c.o	d5a387b9823aabbd
-1	85	1741800126274623652	CMakeFiles/Engine.dir/src/UniverseHandler.c.o	2c4c1b23ca7b1604
-86	194	1741800126358723401	Engine	70129a68b51ea93a
+1	54	1741837068510980188	CMakeFiles/Engine.dir/main.c.o	d5a387b9823aabbd
+1	59	1741832392919684777	CMakeFiles/Engine.dir/src/Animate.c.o	724d208770c6a9ec
+3	179	1741832249412817879	CMakeFiles/Engine.dir/src/UniverseHandler.c.o	2c4c1b23ca7b1604
+59	106	1741832392977855526	Engine	70129a68b51ea93a
+1	49	1741837196809319963	CMakeFiles/Engine.dir/src/Simulation_Handler.c.o	423daf8abd440963
+49	99	1741837196857596119	Engine	ecc815238e713f9f
+2	178	1741837314659032182	CMakeFiles/Engine.dir/main.c.o	d5a387b9823aabbd
+178	236	1741837314835110712	Engine	ecc815238e713f9f
+1	69	1741837330328450096	CMakeFiles/Engine.dir/main.c.o	d5a387b9823aabbd
+69	116	1741837330396631597	Engine	ecc815238e713f9f

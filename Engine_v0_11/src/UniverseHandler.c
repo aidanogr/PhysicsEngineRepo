@@ -34,7 +34,6 @@ int set_DELTA_TIME_SECONDS(double delta_time) {
 //default mass generator, no energy init
 Mass createMass(double mass_kg, double charge, double initial_position_m_x, double initial_position_m_y, double initial_position_m_z,
     double initial_velocity_m_per_s_x, double initial_velocity_m_per_s_y, double initial_velocity_m_per_s_z) {
-    printf("DEltaTimeSeconds2: %f\n", DELTA_TIME_SECONDS);
 
     Vector initial_position_meters = { initial_position_m_x, initial_position_m_y, initial_position_m_z };
     Vector initial_velocity_meters = { initial_velocity_m_per_s_x, initial_velocity_m_per_s_y, initial_velocity_m_per_s_z };

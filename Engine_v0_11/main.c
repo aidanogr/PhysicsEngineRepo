@@ -9,7 +9,7 @@
 #include "include/UNIVERSAL_CONSTANTS.h"
 #include "include/UniverseHandler.h"
 #include "include/Animate.h"
-
+#include "include/Simulation_Handler.h"
 
 
 //MACROS
@@ -30,9 +30,16 @@ void printMasses(Universe* universe) {
 }
 
 int main(void) {
-    //DELTA_TIME_SECONDS = 0.01;
-    const float time_of_simulation_seconds = 10;
-    const int number_of_iterations = (int) (time_of_simulation_seconds / DELTA_TIME_SECONDS);
+
+    //TODO I'm almost certain that theres a casting bug in here somewhere (If it ever works in the first place)
+    set_DELTA_TIME_SECONDS(0.01);
+    double DELTA_TIME_SECONDS = *DELTA_TIME_SECONDS_POINTER;
+    const float time_length_of_simulation_seconds = 10;
+    const int number_of_iterations = (int) (time_length_of_simulation_seconds / DELTA_TIME_SECONDS);
+    int frame_rate = 60;
+    const int iterations_per_second = (int) (1.0/DELTA_TIME_SECONDS);
+    const int iterations_per_sample = (int) ((iterations_per_second/frame_rate) + 1);
+    int number_of_samples = number_of_iterations/iterations_per_sample;
 
     Universe universe;
     createUniverse(&universe);
@@ -43,9 +50,8 @@ int main(void) {
     }
     printMasses(&universe);
 
-    int x_min = -1000; int y_min = -1000;
-    int x_max = 1000; int y_max = 1000;
-    init_animation_2d(x_min, y_min, x_max, y_max);
+    Simulation_Tracker simulation =
+        init_simulation_tracker(DELTA_TIME_SECONDS*iterations_per_sample, number_of_samples, &universe);
 
     int counter = 0;
     while (counter < number_of_iterations) {
@@ -57,6 +63,12 @@ int main(void) {
         } */
         if (applyVelocity(&universe) != 0) {
             return -4;
+        }
+        if (counter % iterations_per_second == 0) {
+
+          //  if (_store() != 0) {
+           //     return -5;
+          //  }
         }
         counter++;
     }
