@@ -6,10 +6,9 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <math.h>
-#include "include/UNIVERSAL_CONSTANTS.h"
-#include "include/UniverseHandler.h"
-#include "include/Animate.h"
-#include "include/Simulation_Handler.h"
+#include "../include/UNIVERSAL_CONSTANTS.h"
+#include "../include/UniverseHandler.h"
+#include "../include/Simulation_Handler.h"
 
 
 //MACROS
@@ -29,17 +28,23 @@ void printMasses(Universe* universe) {
     }
 }
 
-int main(void) {
+int main() {
 
-    //TODO I'm almost certain that theres a casting bug in here somewhere (If it ever works in the first place)
     set_DELTA_TIME_SECONDS(0.01);
     double DELTA_TIME_SECONDS = *DELTA_TIME_SECONDS_POINTER;
     const float time_length_of_simulation_seconds = 10;
     const int number_of_iterations = (int) (time_length_of_simulation_seconds / DELTA_TIME_SECONDS);
+    /*
     int frame_rate = 60;
     const int iterations_per_second = (int) (1.0/DELTA_TIME_SECONDS);
     const int iterations_per_sample = (int) ((iterations_per_second/frame_rate) + 1);
-    int number_of_samples = number_of_iterations/iterations_per_sample;
+    int number_of_samples = number_of_iterations/iterations_per_sample; */
+
+    int approximate_fps = 120;
+    double iterations_per_second = 1.0/DELTA_TIME_SECONDS;
+    int iterations_per_sample = iterations_per_second/approximate_fps;
+
+
 
     Universe universe;
     createUniverse(&universe);
@@ -50,11 +55,16 @@ int main(void) {
     }
     printMasses(&universe);
 
-    Simulation_Tracker simulation =
-        init_simulation_tracker(DELTA_TIME_SECONDS*iterations_per_sample, number_of_samples, &universe);
+   // char* filename = "Earth_Human_Gravity.psim";
+    char* path = "../Simulations/Earth_Human_Gravity.psim";
+    Simulation_Tracker simulation;
+    init_simulation_tracker(path, &universe, &simulation);
+    double timestamp = 0;
+    tracker_update(0, &simulation);
 
     int counter = 0;
     while (counter < number_of_iterations) {
+        timestamp += DELTA_TIME_SECONDS;
         if (applyGravitationalForce(&universe) != 0) {
             return -2;
         }
@@ -64,11 +74,8 @@ int main(void) {
         if (applyVelocity(&universe) != 0) {
             return -4;
         }
-        if (counter % iterations_per_second == 0) {
-
-          //  if (_store() != 0) {
-           //     return -5;
-          //  }
+        if (counter % iterations_per_sample == 0) {
+            tracker_update(timestamp, &simulation);
         }
         counter++;
     }

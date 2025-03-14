@@ -49,13 +49,6 @@ cmake_ninja_workdir = /Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/
 
 build cmake_object_order_depends_target_Engine: phony || .
 
-build CMakeFiles/Engine.dir/src/Animate.c.o: C_COMPILER__Engine_unscanned_Debug /Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer$ Science/C/PhysicsEngineRepo/Engine_v0_11/src/Animate.c || cmake_object_order_depends_target_Engine
-  DEP_FILE = CMakeFiles/Engine.dir/src/Animate.c.o.d
-  FLAGS = -g -std=gnu99 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -mmacosx-version-min=15.0 -fcolor-diagnostics
-  INCLUDES = -I/opt/homebrew/Cellar/glfw/3.4/include
-  OBJECT_DIR = CMakeFiles/Engine.dir
-  OBJECT_FILE_DIR = CMakeFiles/Engine.dir/src
-
 build CMakeFiles/Engine.dir/src/Simulation_Handler.c.o: C_COMPILER__Engine_unscanned_Debug /Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer$ Science/C/PhysicsEngineRepo/Engine_v0_11/src/Simulation_Handler.c || cmake_object_order_depends_target_Engine
   DEP_FILE = CMakeFiles/Engine.dir/src/Simulation_Handler.c.o.d
   FLAGS = -g -std=gnu99 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -mmacosx-version-min=15.0 -fcolor-diagnostics
@@ -70,12 +63,19 @@ build CMakeFiles/Engine.dir/src/UniverseHandler.c.o: C_COMPILER__Engine_unscanne
   OBJECT_DIR = CMakeFiles/Engine.dir
   OBJECT_FILE_DIR = CMakeFiles/Engine.dir/src
 
-build CMakeFiles/Engine.dir/main.c.o: C_COMPILER__Engine_unscanned_Debug /Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer$ Science/C/PhysicsEngineRepo/Engine_v0_11/main.c || cmake_object_order_depends_target_Engine
-  DEP_FILE = CMakeFiles/Engine.dir/main.c.o.d
+build CMakeFiles/Engine.dir/src/Utility.c.o: C_COMPILER__Engine_unscanned_Debug /Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer$ Science/C/PhysicsEngineRepo/Engine_v0_11/src/Utility.c || cmake_object_order_depends_target_Engine
+  DEP_FILE = CMakeFiles/Engine.dir/src/Utility.c.o.d
   FLAGS = -g -std=gnu99 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -mmacosx-version-min=15.0 -fcolor-diagnostics
   INCLUDES = -I/opt/homebrew/Cellar/glfw/3.4/include
   OBJECT_DIR = CMakeFiles/Engine.dir
-  OBJECT_FILE_DIR = CMakeFiles/Engine.dir
+  OBJECT_FILE_DIR = CMakeFiles/Engine.dir/src
+
+build CMakeFiles/Engine.dir/SimulationsSource/EarthGravity.c.o: C_COMPILER__Engine_unscanned_Debug /Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer$ Science/C/PhysicsEngineRepo/Engine_v0_11/SimulationsSource/EarthGravity.c || cmake_object_order_depends_target_Engine
+  DEP_FILE = CMakeFiles/Engine.dir/SimulationsSource/EarthGravity.c.o.d
+  FLAGS = -g -std=gnu99 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -mmacosx-version-min=15.0 -fcolor-diagnostics
+  INCLUDES = -I/opt/homebrew/Cellar/glfw/3.4/include
+  OBJECT_DIR = CMakeFiles/Engine.dir
+  OBJECT_FILE_DIR = CMakeFiles/Engine.dir/SimulationsSource
 
 
 # =============================================================================
@@ -85,9 +85,8 @@ build CMakeFiles/Engine.dir/main.c.o: C_COMPILER__Engine_unscanned_Debug /Users/
 #############################################
 # Link the executable Engine
 
-build Engine: C_EXECUTABLE_LINKER__Engine_Debug CMakeFiles/Engine.dir/src/Animate.c.o CMakeFiles/Engine.dir/src/Simulation_Handler.c.o CMakeFiles/Engine.dir/src/UniverseHandler.c.o CMakeFiles/Engine.dir/main.c.o
+build Engine: C_EXECUTABLE_LINKER__Engine_Debug CMakeFiles/Engine.dir/src/Simulation_Handler.c.o CMakeFiles/Engine.dir/src/UniverseHandler.c.o CMakeFiles/Engine.dir/src/Utility.c.o CMakeFiles/Engine.dir/SimulationsSource/EarthGravity.c.o
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -mmacosx-version-min=15.0
-  LINK_LIBRARIES = -Wl,-rpath,/opt/homebrew/Cellar/glfw/3.4/lib  -lglfw  -framework OpenGL
   LINK_PATH = -L/opt/homebrew/Cellar/glfw/3.4/lib
   OBJECT_DIR = CMakeFiles/Engine.dir
   POST_BUILD = :

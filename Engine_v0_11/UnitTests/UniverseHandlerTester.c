@@ -4,7 +4,7 @@
 
 #include "../include/UniverseHandler.h"
 #include <stdio.h>
-
+#include "Simulation_Handler_Tester.h"
 /*
 typedef enum {
     TEST_POSITION, TEST_VELOCITY
@@ -119,4 +119,7 @@ int main() {
     doesnt_requires_working_universe:
     printf("\nnumber_failed_tests: %d\n", number_failed_tests);
 
+    //File Read test
+    testFileRead();
+    testCasting();
 }

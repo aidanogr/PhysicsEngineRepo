@@ -9,7 +9,6 @@
 #include <math.h>
 #include "../include/UNIVERSAL_CONSTANTS.h"
 #include "../include/UniverseHandler.h"
-#include "../include/Animate.h"
 
 
 double DELTA_TIME_SECONDS = 0.01;

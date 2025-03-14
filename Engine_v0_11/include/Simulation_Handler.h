@@ -8,9 +8,15 @@
 #include "UniverseHandler.h"
 
 typedef struct{
-
+    Universe* universe;
+    double time_stamp_seconds;
+    FILE* tracker_file;
+    size_t bytes_written; //initialized here to avoid headache during write checks
 }Simulation_Tracker;
 
-Simulation_Tracker init_simulation_tracker(double sample_time, int number_of_samples, Universe* universe);
-//int s
+
+int init_simulation_tracker(char* path, Universe* universe, Simulation_Tracker* tracker);
+
+int tracker_update(double timestamp,Simulation_Tracker* tracker);
+
 #endif //SIMULATION_HANDLER_H

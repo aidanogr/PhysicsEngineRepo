@@ -49,8 +49,8 @@ cmake_ninja_workdir = /Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/
 
 build cmake_object_order_depends_target_TESTS: phony || .
 
-build CMakeFiles/TESTS.dir/Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer_Science/C/PhysicsEngineRepo/Engine_v0_11/src/Animate.c.o: C_COMPILER__TESTS_unscanned_Debug /Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer$ Science/C/PhysicsEngineRepo/Engine_v0_11/src/Animate.c || cmake_object_order_depends_target_TESTS
-  DEP_FILE = CMakeFiles/TESTS.dir/Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer_Science/C/PhysicsEngineRepo/Engine_v0_11/src/Animate.c.o.d
+build CMakeFiles/TESTS.dir/Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer_Science/C/PhysicsEngineRepo/Engine_v0_11/src/Simulation_Handler.c.o: C_COMPILER__TESTS_unscanned_Debug /Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer$ Science/C/PhysicsEngineRepo/Engine_v0_11/src/Simulation_Handler.c || cmake_object_order_depends_target_TESTS
+  DEP_FILE = CMakeFiles/TESTS.dir/Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer_Science/C/PhysicsEngineRepo/Engine_v0_11/src/Simulation_Handler.c.o.d
   FLAGS = -g -std=gnu99 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -mmacosx-version-min=15.0 -fcolor-diagnostics
   INCLUDES = -I/opt/homebrew/Cellar/glfw/3.4/include
   OBJECT_DIR = CMakeFiles/TESTS.dir
@@ -62,6 +62,20 @@ build CMakeFiles/TESTS.dir/Users/aidanogrady/Library/CloudStorage/OneDrive-Perso
   INCLUDES = -I/opt/homebrew/Cellar/glfw/3.4/include
   OBJECT_DIR = CMakeFiles/TESTS.dir
   OBJECT_FILE_DIR = CMakeFiles/TESTS.dir/Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer_Science/C/PhysicsEngineRepo/Engine_v0_11/src
+
+build CMakeFiles/TESTS.dir/Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer_Science/C/PhysicsEngineRepo/Engine_v0_11/src/Utility.c.o: C_COMPILER__TESTS_unscanned_Debug /Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer$ Science/C/PhysicsEngineRepo/Engine_v0_11/src/Utility.c || cmake_object_order_depends_target_TESTS
+  DEP_FILE = CMakeFiles/TESTS.dir/Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer_Science/C/PhysicsEngineRepo/Engine_v0_11/src/Utility.c.o.d
+  FLAGS = -g -std=gnu99 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -mmacosx-version-min=15.0 -fcolor-diagnostics
+  INCLUDES = -I/opt/homebrew/Cellar/glfw/3.4/include
+  OBJECT_DIR = CMakeFiles/TESTS.dir
+  OBJECT_FILE_DIR = CMakeFiles/TESTS.dir/Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer_Science/C/PhysicsEngineRepo/Engine_v0_11/src
+
+build CMakeFiles/TESTS.dir/Simulation_Handler_Tester.c.o: C_COMPILER__TESTS_unscanned_Debug /Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer$ Science/C/PhysicsEngineRepo/Engine_v0_11/UnitTests/Simulation_Handler_Tester.c || cmake_object_order_depends_target_TESTS
+  DEP_FILE = CMakeFiles/TESTS.dir/Simulation_Handler_Tester.c.o.d
+  FLAGS = -g -std=gnu99 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -mmacosx-version-min=15.0 -fcolor-diagnostics
+  INCLUDES = -I/opt/homebrew/Cellar/glfw/3.4/include
+  OBJECT_DIR = CMakeFiles/TESTS.dir
+  OBJECT_FILE_DIR = CMakeFiles/TESTS.dir
 
 build CMakeFiles/TESTS.dir/UniverseHandlerTester.c.o: C_COMPILER__TESTS_unscanned_Debug /Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer$ Science/C/PhysicsEngineRepo/Engine_v0_11/UnitTests/UniverseHandlerTester.c || cmake_object_order_depends_target_TESTS
   DEP_FILE = CMakeFiles/TESTS.dir/UniverseHandlerTester.c.o.d
@@ -78,7 +92,7 @@ build CMakeFiles/TESTS.dir/UniverseHandlerTester.c.o: C_COMPILER__TESTS_unscanne
 #############################################
 # Link the executable TESTS
 
-build TESTS: C_EXECUTABLE_LINKER__TESTS_Debug CMakeFiles/TESTS.dir/Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer_Science/C/PhysicsEngineRepo/Engine_v0_11/src/Animate.c.o CMakeFiles/TESTS.dir/Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer_Science/C/PhysicsEngineRepo/Engine_v0_11/src/UniverseHandler.c.o CMakeFiles/TESTS.dir/UniverseHandlerTester.c.o
+build TESTS: C_EXECUTABLE_LINKER__TESTS_Debug CMakeFiles/TESTS.dir/Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer_Science/C/PhysicsEngineRepo/Engine_v0_11/src/Simulation_Handler.c.o CMakeFiles/TESTS.dir/Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer_Science/C/PhysicsEngineRepo/Engine_v0_11/src/UniverseHandler.c.o CMakeFiles/TESTS.dir/Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer_Science/C/PhysicsEngineRepo/Engine_v0_11/src/Utility.c.o CMakeFiles/TESTS.dir/Simulation_Handler_Tester.c.o CMakeFiles/TESTS.dir/UniverseHandlerTester.c.o
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -mmacosx-version-min=15.0
   LINK_LIBRARIES = -Wl,-rpath,/opt/homebrew/Cellar/glfw/3.4/lib  -lglfw  -framework OpenGL
   LINK_PATH = -L/opt/homebrew/Cellar/glfw/3.4/lib
