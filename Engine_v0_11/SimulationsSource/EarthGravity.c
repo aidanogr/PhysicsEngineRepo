@@ -34,15 +34,14 @@ int main() {
     double DELTA_TIME_SECONDS = *DELTA_TIME_SECONDS_POINTER;
     const float time_length_of_simulation_seconds = 10;
     const int number_of_iterations = (int) (time_length_of_simulation_seconds / DELTA_TIME_SECONDS);
+    const int sampling_frequency = 10;
     /*
     int frame_rate = 60;
     const int iterations_per_second = (int) (1.0/DELTA_TIME_SECONDS);
     const int iterations_per_sample = (int) ((iterations_per_second/frame_rate) + 1);
     int number_of_samples = number_of_iterations/iterations_per_sample; */
 
-    int approximate_fps = 120;
-    double iterations_per_second = 1.0/DELTA_TIME_SECONDS;
-    int iterations_per_sample = iterations_per_second/approximate_fps;
+
 
 
 
@@ -74,14 +73,20 @@ int main() {
         if (applyVelocity(&universe) != 0) {
             return -4;
         }
-        if (counter % iterations_per_sample == 0) {
-            tracker_update(timestamp, &simulation);
+        if (counter % sampling_frequency == 0) {
+            int result = tracker_update(timestamp, &simulation);
+            if (result != 0) {
+                printf("Error code: %d\n", result);
+            }
         }
         counter++;
     }
 
+    tracker_update(timestamp, &simulation);
+
     printf("\n\n");
     printMasses(&universe);
+    terminate_simulation_tracker(&simulation);
     return 1;
 
 }

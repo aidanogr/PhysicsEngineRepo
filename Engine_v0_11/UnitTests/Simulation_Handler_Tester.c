@@ -34,9 +34,11 @@ void testFileRead() {
     FILE* file = fopen("/Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer Science/C/PhysicsEngineRepo/Engine_v0_11/Simulations/Earth_Human_Gravity.psim", "rb");
     double time_stamp;
     MassData buffer_mass;
-
+    uint64_t num_mass = 0;
+    fread(&num_mass, sizeof(uint64_t), 1, file);
+    printf("%d\n", (int) num_mass);
     while (fread(&time_stamp, sizeof(double), 1, file) == 1) {
-        fread(&buffer_mass.index, sizeof(int), 1, file);
+        fread(&buffer_mass.index, sizeof(uint64_t), 1, file);
         fread(&buffer_mass.mass_kg, sizeof(double), 1, file);
         fread(&buffer_mass.charge, sizeof(double), 1, file);
         fread(&buffer_mass.position_meters.vx, sizeof(double), 1, file);

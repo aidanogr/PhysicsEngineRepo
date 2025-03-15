@@ -3,6 +3,7 @@
 //
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include "../include/Simulation_Handler.h"
 
 
@@ -28,6 +29,7 @@ int init_simulation_tracker(char* path, Universe* universe, Simulation_Tracker* 
         printf("Error opening simulation tracker file\n");
         return -1;
     }
+    fwrite(&universe->number_of_masses, sizeof(uint64_t), 1,simulation_tracker_file);
     simulation_tracker.tracker_file = simulation_tracker_file;
     *sim = simulation_tracker;
     return 0;
@@ -51,15 +53,15 @@ int tracker_update(double timestamp, Simulation_Tracker* simulation_tracker) {
     for (int i = 0; i < simulation_tracker->universe->number_of_masses; i++) {
 
         simulation_tracker->bytes_written += fwrite(&(timestamp), sizeof(double), 1, simulation_tracker->tracker_file);
-        simulation_tracker->bytes_written += fwrite(&(buffer_mass->index), sizeof(int), 1, simulation_tracker->tracker_file);
+        simulation_tracker->bytes_written += fwrite(&(buffer_mass->index), sizeof(uint64_t), 1, simulation_tracker->tracker_file);
         simulation_tracker->bytes_written += fwrite(&(buffer_mass->mass_kg), sizeof(double), 1, simulation_tracker->tracker_file);
         simulation_tracker->bytes_written += fwrite(&(buffer_mass->charge), sizeof(double), 1, simulation_tracker->tracker_file);
         simulation_tracker->bytes_written += fwrite(&(buffer_mass->position_meters.vx), sizeof(double), 1, simulation_tracker->tracker_file);
         simulation_tracker->bytes_written += fwrite(&(buffer_mass->position_meters.vy), sizeof(double), 1, simulation_tracker->tracker_file);
         simulation_tracker->bytes_written += fwrite(&(buffer_mass->position_meters.vz), sizeof(double), 1, simulation_tracker->tracker_file);
         simulation_tracker->bytes_written += fwrite(&(buffer_mass->velocity_meters.vx), sizeof(double), 1, simulation_tracker->tracker_file);
-        simulation_tracker->bytes_written += fwrite(&(buffer_mass->velocity_meters.vx), sizeof(double), 1, simulation_tracker->tracker_file);
-        simulation_tracker->bytes_written += fwrite(&(buffer_mass->velocity_meters.vx), sizeof(double), 1, simulation_tracker->tracker_file);
+        simulation_tracker->bytes_written += fwrite(&(buffer_mass->velocity_meters.vy), sizeof(double), 1, simulation_tracker->tracker_file);
+        simulation_tracker->bytes_written += fwrite(&(buffer_mass->velocity_meters.vz), sizeof(double), 1, simulation_tracker->tracker_file);
         buffer_mass = buffer_mass->next_mass;
 
     }

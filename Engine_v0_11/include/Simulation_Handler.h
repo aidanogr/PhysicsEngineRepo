@@ -19,4 +19,6 @@ int init_simulation_tracker(char* path, Universe* universe, Simulation_Tracker* 
 
 int tracker_update(double timestamp,Simulation_Tracker* tracker);
 
+int terminate_simulation_tracker(Simulation_Tracker* tracker);
+
 #endif //SIMULATION_HANDLER_H

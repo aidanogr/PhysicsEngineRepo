@@ -151,8 +151,8 @@ int applyGravitationalForce(Universe* universe) {
     Mass* anchor_mass = universe->first_mass;
     Mass* buffer_mass  = universe->first_mass;
 
-    int buffer_index = anchor_mass->index;
-    int anchor_index = anchor_mass->index;
+    uint64_t buffer_index = anchor_mass->index;
+    uint64_t anchor_index = anchor_mass->index;
 
     double distance_squared = 0;
     double acceleration_anchor_magnitude = 0;
@@ -216,8 +216,8 @@ int applyElectrostaticForce(Universe* universe) {
     Mass* anchor_mass = universe->first_mass;
     Mass* buffer_mass  = universe->first_mass;
 
-    int buffer_index = anchor_mass->index;
-    int anchor_index = anchor_mass->index;
+    uint64_t buffer_index = anchor_mass->index;
+    uint64_t anchor_index = anchor_mass->index;
 
     double distance_squared = 0;
     double acceleration_anchor_magnitude = 0;
@@ -279,7 +279,7 @@ int applyElectrostaticForce(Universe* universe) {
 int applyVelocity(Universe* universe) {
     if(universe->number_of_masses == 0) { return -1; }
     Mass* buffer_mass = universe->first_mass;
-    int buffer_index = 0;
+    uint64_t buffer_index = 0;
     while (buffer_index < universe->number_of_masses) {
         if (buffer_mass == NULL) { return -2;}
 

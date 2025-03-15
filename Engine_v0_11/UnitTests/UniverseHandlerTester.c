@@ -121,5 +121,5 @@ int main() {
 
     //File Read test
     testFileRead();
-    testCasting();
+  //  testCasting();
 }

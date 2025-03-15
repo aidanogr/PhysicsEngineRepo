@@ -4,7 +4,7 @@
 
 #ifndef UNIVERSEHANDLER_H
 #define UNIVERSEHANDLER_H
-
+#include <stdint.h>
 
 
 typedef struct {
@@ -24,7 +24,7 @@ struct Mass{
     Vector position_meters;
     Vector velocity_meters;
 
-    int index;
+    uint64_t index;
     Mass* next_mass;    //DO NOT MANUALLY MODIFY THIS FIELD, handled by addMassToUniverse()
 };
 
