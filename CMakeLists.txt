@@ -4,6 +4,6 @@ set(CMAKE_C_STANDARD 11)
 project(AnimationLibrary C)
 
 
-add_executable(AnimationLibrary animator.c)
+add_executable(AnimationLibrary animator.c main_tester.c)
 
 

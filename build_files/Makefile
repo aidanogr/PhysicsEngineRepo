@@ -153,6 +153,30 @@ animator.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/AnimationLibrary.dir/build.make CMakeFiles/AnimationLibrary.dir/animator.c.s
 .PHONY : animator.c.s
 
+main_tester.o: main_tester.c.o
+.PHONY : main_tester.o
+
+# target to build an object file
+main_tester.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AnimationLibrary.dir/build.make CMakeFiles/AnimationLibrary.dir/main_tester.c.o
+.PHONY : main_tester.c.o
+
+main_tester.i: main_tester.c.i
+.PHONY : main_tester.i
+
+# target to preprocess a source file
+main_tester.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AnimationLibrary.dir/build.make CMakeFiles/AnimationLibrary.dir/main_tester.c.i
+.PHONY : main_tester.c.i
+
+main_tester.s: main_tester.c.s
+.PHONY : main_tester.s
+
+# target to generate assembly for a file
+main_tester.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AnimationLibrary.dir/build.make CMakeFiles/AnimationLibrary.dir/main_tester.c.s
+.PHONY : main_tester.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -165,6 +189,9 @@ help:
 	@echo "... animator.o"
 	@echo "... animator.i"
 	@echo "... animator.s"
+	@echo "... main_tester.o"
+	@echo "... main_tester.i"
+	@echo "... main_tester.s"
 .PHONY : help
 
 

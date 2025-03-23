@@ -1,5 +1,6 @@
-CMakeFiles/AnimationLibrary.dir/animator.c.o: \
-  /Users/aidanogrady/OneDrive/Documents/Computer\ Science/C/AnimationLibrary/animator.c \
+CMakeFiles/AnimationLibrary.dir/main_tester.c.o: \
+  /Users/aidanogrady/OneDrive/Documents/Computer\ Science/C/AnimationLibrary/main_tester.c \
+  /Users/aidanogrady/OneDrive/Documents/Computer\ Science/C/AnimationLibrary/animator.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/stdio.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/_stdio.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/cdefs.h \
@@ -83,10 +84,9 @@ CMakeFiles/AnimationLibrary.dir/animator.c.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/_abort.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_types/_dev_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_types/_mode_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/strings.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/_strings.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/secure/_strings.h \
-  /Users/aidanogrady/OneDrive/Documents/Computer\ Science/C/AnimationLibrary/animator.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/strings.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/string.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/_string.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_types/_rsize_t.h \
