@@ -21,6 +21,10 @@ double delta_height;
 
 int mapped_coordinate[] = {0, 0};
 
+uint8_t COORDINATE_SYSTEM_RED;
+uint8_t COORDINATE_SYSTEM_BLUE;
+uint8_t COORDINATE_SYSTEM_GREEN;
+
 //-1 meaning "unset" (see draw_axis())
 int x_axis_row = -1;
 int y_axis_column = -1;
@@ -78,13 +82,14 @@ int change_background_color(uint8_t RED, uint8_t BLUE, uint8_t GREEN) {
  * @return -1 if bounds have bad shape (x_min >= x_max or y_min >= y_max)
  * @return -2 if WIDTH <= 0 or HEIGHT <= 0
  */
-int initialize_animation(double x_min_temp, double y_min_temp, double x_max_temp, double y_max_temp, int number_of_masses) {
+int initialize_animation(double x_min_temp, double y_min_temp, double x_max_temp, double y_max_temp, int number_of_masses_temp) {
     if(x_min_temp >= x_max_temp || y_min_temp >= y_max_temp) {
 	return -1;
     }
     if(WIDTH <= 0 || HEIGHT <= 0) {
 	return -2;
     }
+    number_of_masses = number_of_masses_temp;
     x_min = x_min_temp;
     y_min = y_min_temp;
     x_max = x_max_temp;
@@ -92,13 +97,29 @@ int initialize_animation(double x_min_temp, double y_min_temp, double x_max_temp
     
     delta_width = (x_max-x_min)/WIDTH;
     delta_height = (y_max-y_min)/HEIGHT;
+
+    COORDINATE_SYSTEM_RED = 250;
+    COORDINATE_SYSTEM_BLUE = 0;
+    COORDINATE_SYSTEM_GREEN = 0;
+
+    x_axis_row = -1;
+    y_axis_column = -1;
     change_background_color(0, 0, 0);
     boundary_flags &= 0b0;
     
     return 0;
 }
 
-
+/**
+ * Used to update axis and tic mark colors.
+ * By default, the color will always be 250, 0, 0
+ */
+void change_coordinate_system_color(uint8_t RED, uint8_t GREEN, uint8_t BLUE) {
+    COORDINATE_SYSTEM_RED = RED;
+    COORDINATE_SYSTEM_GREEN = GREEN;
+    COORDINATE_SYSTEM_BLUE = BLUE;
+}
+    
 
 
 /**
@@ -138,7 +159,8 @@ int map_coordinate_to_pixel(double coordinate_x, double coordinate_y) {
     return 0;
 }
 
-//TODO What the fuck?
+
+//make color changeable
 /**
  * Always call draw_axis() before draw_tic***
  * note: tic width represents lengths of tic either horizontal 
@@ -146,68 +168,55 @@ int map_coordinate_to_pixel(double coordinate_x, double coordinate_y) {
  *	 tic is 1 pixel. //TODO add variable tic thickness
  * @param tic_width_percentage : width of tic expressed as percentage of width
  * @param tic_height_percentage : height of tic expressed as percentage of height
- * @param number_of_tics_per_axis : 
+ * @param delta : coordinate difference between tic marks (not pixel difference) 
+ * @return //TODO does this need a return?
 */
 int draw_tic_marks(int tic_width_horizontal_percentage, int tic_width_vertical_percentage, double delta) {
 
     int tic_width_horizontal = (int) (0.01 * tic_width_horizontal_percentage * WIDTH);
     int tic_width_vertical = (int) (0.01 * tic_width_vertical_percentage * HEIGHT);
+    int number_of_tics_y_axis = (int) ((y_max-y_min)/delta);
+    int number_of_tics_x_axis = (int) ((x_max-x_min)/delta);
 
-    for(int y = 0; y < (int) ((y_max-y_min)/delta) ; y++) {
-	if((boundary_flags & 0b0011) > 0) {
-	    if((boundary_flags & 0b0010) > 0) {
-
-		map_coordinate_to_pixel(x_min, y_min + y * delta);
-		for(int x = mapped_coordinate[0]; x < mapped_coordinate[0] + tic_width_horizontal/2; x++) {
-		    image[mapped_coordinate[1]-1][x][0] = 200;
-		    image[mapped_coordinate[1]-1][x][1] = 0;
-		    image[mapped_coordinate[1]-1][x][2] = 0;
-		}
+    //y-axis tics
+    for(int y = 0; y < number_of_tics_y_axis; y++) {
+	if((boundary_flags & 0b0010) > 0) {
+	    map_coordinate_to_pixel(x_min, y_min + y * delta);
+	    for(int x = mapped_coordinate[0]; x < mapped_coordinate[0] + tic_width_horizontal/2; x++) {
+		set_pixel_RGB(mapped_coordinate[1]-1, x, COORDINATE_SYSTEM_RED, COORDINATE_SYSTEM_BLUE, COORDINATE_SYSTEM_GREEN);
 	    }
-	    if((boundary_flags & 0b0001) > 0) {
-
-		map_coordinate_to_pixel(x_max, y_min + y * delta);
-		for(int x = mapped_coordinate[0] - tic_width_horizontal/2; x < mapped_coordinate[0]; x++) {
-		    image[mapped_coordinate[1]-1][x][0] = 200;
-		    image[mapped_coordinate[1]-1][x][1] = 0;
-		    image[mapped_coordinate[1]-1][x][2] = 0;
-		}
+	}
+	else if((boundary_flags & 0b0001) > 0) {
+	    map_coordinate_to_pixel(x_max, y_min + y * delta);
+	    for(int x = mapped_coordinate[0] - tic_width_horizontal/2; x < mapped_coordinate[0]; x++) {
+		set_pixel_RGB(mapped_coordinate[1]-1, x, COORDINATE_SYSTEM_RED, COORDINATE_SYSTEM_BLUE, COORDINATE_SYSTEM_GREEN);
 	    }
 	}
 	else {
 	    map_coordinate_to_pixel(0, y_min + y * delta);
 	    for(int x = mapped_coordinate[0] - tic_width_horizontal/2; x < mapped_coordinate[0] + tic_width_horizontal/2 ; x++) {
-		  image[mapped_coordinate[1]-1][x][0] = 200;
-		  image[mapped_coordinate[1]-1][x][1] = 0;
-		  image[mapped_coordinate[1]-1][x][2] = 0;
+	        set_pixel_RGB(mapped_coordinate[1]-1, x, COORDINATE_SYSTEM_RED, COORDINATE_SYSTEM_BLUE, COORDINATE_SYSTEM_GREEN);
 	    }
 	}
     }
-    for(int x = 0; x < (int) (x_max-x_min)/delta; x++) {
-	if((boundary_flags & 0b1100) > 0) {
-	    if((boundary_flags & 0b1000) > 0) {
-		map_coordinate_to_pixel(x_min + x * delta, y_min);
-		for(int y = mapped_coordinate[1]-tic_width_vertical/2; y < mapped_coordinate[1]; y++) {
-		    image[y][mapped_coordinate[0]][0] = 200;
-		    image[y][mapped_coordinate[0]][1] = 0;
-		    image[y][mapped_coordinate[0]][2] = 0;	    
-		}
+    //x-axis tics
+    for(int x = 0; x < number_of_tics_x_axis; x++) {
+	if((boundary_flags & 0b1000) > 0) {
+	    map_coordinate_to_pixel(x_min + x * delta, y_min);
+	    for(int y = mapped_coordinate[1]-tic_width_vertical/2; y < mapped_coordinate[1]; y++) {
+		set_pixel_RGB(y, mapped_coordinate[0], COORDINATE_SYSTEM_RED, COORDINATE_SYSTEM_BLUE, COORDINATE_SYSTEM_GREEN);
 	    }
-	    if((boundary_flags & 0b0100) > 0) {
-		map_coordinate_to_pixel(x_min + x * delta, y_max);
-		for(int y = mapped_coordinate[0]; y < mapped_coordinate[1] + tic_width_vertical; y++) {
-		    image[y][mapped_coordinate[0]][0] = 200;
-		    image[y][mapped_coordinate[0]][1] = 0;
-		    image[y][mapped_coordinate[0]][2] = 0;
-		}
+	}
+	else if((boundary_flags & 0b0100) > 0) {
+	    map_coordinate_to_pixel(x_min + x * delta, y_max);
+	    for(int y = mapped_coordinate[1]; y < mapped_coordinate[1] + tic_width_vertical; y++) {
+		set_pixel_RGB(y, mapped_coordinate[0], COORDINATE_SYSTEM_RED, COORDINATE_SYSTEM_BLUE, COORDINATE_SYSTEM_GREEN);
 	    }
 	}
 	else {
 	    map_coordinate_to_pixel(x_min + x * delta, 0);
 	    for(int y = mapped_coordinate[1] - tic_width_vertical/2; y < mapped_coordinate[1] + tic_width_vertical/2; y++) {
-		image[y][mapped_coordinate[0]][0] = 200;
-		image[y][mapped_coordinate[0]][1] = 0;
-		image[y][mapped_coordinate[0]][2] = 0;
+	        set_pixel_RGB(y, mapped_coordinate[0], COORDINATE_SYSTEM_RED, COORDINATE_SYSTEM_BLUE, COORDINATE_SYSTEM_GREEN);
 	    }
 	}
 
@@ -218,11 +227,14 @@ int draw_tic_marks(int tic_width_horizontal_percentage, int tic_width_vertical_p
 
 /**
  * Always call this function before draw_tic_marks(), particularly if the origin is not in bounds of the plot.
+ * This function draws axis based on initialized mins and maxes. If mins and maxes are restricted to less than 4 quadrants,
+ * axis will appear on edges
  */
 void draw_axis() {
 
+    int coordinate_to_be_mapped_x = 0; int coordinate_to_be_mapped_y = 0;   //normally, coordinate to be mapped is origin
+
     //sets axis on borders if coordinate system is limited to certain quadrants. See definition of boundary_flags for description
-    int coordinate_to_be_mapped_x = 0; int coordinate_to_be_mapped_y = 0;
     if(y_min >= 0) {
 	x_axis_row = HEIGHT - 1;
 	boundary_flags |= 0b1000;
@@ -244,6 +256,7 @@ void draw_axis() {
 	coordinate_to_be_mapped_x = x_max;
     }
 
+
     map_coordinate_to_pixel(coordinate_to_be_mapped_x, coordinate_to_be_mapped_y);
     if(x_axis_row == -1) {
 	x_axis_row = mapped_coordinate[1];
@@ -253,15 +266,10 @@ void draw_axis() {
     } 
 
     for(int x = 0; x < WIDTH; x++){
-	image[x_axis_row][x][0] = 255; 
-	image[x_axis_row][x][1] = 0; 
-	image[x_axis_row][x][2] = 0; 
-
+	set_pixel_RGB(x_axis_row, x, COORDINATE_SYSTEM_RED, COORDINATE_SYSTEM_GREEN, COORDINATE_SYSTEM_BLUE);
     }
     for(int y = 0; y < HEIGHT; y++) {
-	image[y][y_axis_column][0] = 255;
-	image[y][y_axis_column][1] = 0;
-	image[y][y_axis_column][2] = 0;
+	set_pixel_RGB(y, y_axis_column, COORDINATE_SYSTEM_RED, COORDINATE_SYSTEM_GREEN, COORDINATE_SYSTEM_BLUE);
     }
 
 }
@@ -275,16 +283,14 @@ void draw_axis() {
  */
 int draw_point_mass_by_pixel(uint8_t RED, uint8_t GREEN, uint8_t BLUE, int position_x, int position_y) {
 	if (!(position_x < 0 || position_x > WIDTH-1 || position_y < 0 || position_y > HEIGHT-1)) {
-		image[position_y][position_x][0] = RED;
-		image[position_y][position_x][1] = GREEN;
-		image[position_y][position_x][2] = BLUE;
+		set_pixel_RGB(position_y, position_x, RED, GREEN, BLUE);
 		return 0;
 	} 
 	else {
 		return -1;
 	}
-
 }
+
 /**
  * maps position_x and y and calls draw_point_mass by pixel
  * @param RED 8 bit RGB

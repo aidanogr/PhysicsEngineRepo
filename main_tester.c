@@ -4,10 +4,10 @@
 
 void test_coordinate_systems(int x_min_temp, int y_min_temp, int x_max_temp, int y_max_temp, int tic_delta, int counter) {
     
-    initialize_animation(x_min_temp, y_min_temp, x_max_temp, y_max_temp, tic_delta); 
+    initialize_animation(x_min_temp, y_min_temp, x_max_temp, y_max_temp, 0); 
     change_background_color(0, 0, 0);
     draw_axis();
-    draw_tic_marks(4,4, 1);
+    draw_tic_marks(4,4, tic_delta);
 
     char filename[100];
     sprintf(filename, "%s%d%s","./tested_coordinate_systems/coordinate_system_", counter, ".ppm");
@@ -21,7 +21,6 @@ void test_multiple_coordinate_systems() {
     test_coordinate_systems(-10, 1, 10, 10, 1, 1);
     test_coordinate_systems(1, 1, 10, 10, 1, 2);
     test_coordinate_systems(1, -10, 10, 10, 1, 3);
-
     test_coordinate_systems(-10, -10, -4, -4, 1, 4);
     test_coordinate_systems(-10, -10, -4, 4, 1, 5);   
 
