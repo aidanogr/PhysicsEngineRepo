@@ -32,7 +32,8 @@ extern int x_axis_row;
 extern int y_axis_column;
 
 // Function declarations
-void initialize_animation(double x_min_temp, double y_min_temp, double x_max_temp, double y_max_temp, int number_of_masses);
+int initialize_animation(double x_min_temp, double y_min_temp, double x_max_temp, double y_max_temp, int number_of_masses);
+int change_background_color(uint8_t RED, uint8_t GREEN, uint8_t BLUE);
 int save_ppm(const char *filename, uint8_t image[HEIGHT][WIDTH][3]);
 int map_coordinate_to_pixel(double coordinate_x, double coordinate_y);
 int draw_tic_marks(int tic_width_percentage, int tic_height_percentage, double delta);
