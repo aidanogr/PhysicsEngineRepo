@@ -49,8 +49,14 @@ cmake_ninja_workdir = /Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/
 
 build cmake_object_order_depends_target_AnimationLibrary: phony || .
 
-build CMakeFiles/AnimationLibrary.dir/animator.c.o: C_COMPILER__AnimationLibrary_unscanned_Debug /Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer$ Science/C/AnimationLibrary/animator.c || cmake_object_order_depends_target_AnimationLibrary
-  DEP_FILE = CMakeFiles/AnimationLibrary.dir/animator.c.o.d
+build CMakeFiles/AnimationLibrary.dir/frame_drawer.c.o: C_COMPILER__AnimationLibrary_unscanned_Debug /Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer$ Science/C/AnimationLibrary/frame_drawer.c || cmake_object_order_depends_target_AnimationLibrary
+  DEP_FILE = CMakeFiles/AnimationLibrary.dir/frame_drawer.c.o.d
+  FLAGS = -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -mmacosx-version-min=15.0 -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/AnimationLibrary.dir
+  OBJECT_FILE_DIR = CMakeFiles/AnimationLibrary.dir
+
+build CMakeFiles/AnimationLibrary.dir/main_tester.c.o: C_COMPILER__AnimationLibrary_unscanned_Debug /Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer$ Science/C/AnimationLibrary/main_tester.c || cmake_object_order_depends_target_AnimationLibrary
+  DEP_FILE = CMakeFiles/AnimationLibrary.dir/main_tester.c.o.d
   FLAGS = -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -mmacosx-version-min=15.0 -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/AnimationLibrary.dir
   OBJECT_FILE_DIR = CMakeFiles/AnimationLibrary.dir
@@ -63,7 +69,7 @@ build CMakeFiles/AnimationLibrary.dir/animator.c.o: C_COMPILER__AnimationLibrary
 #############################################
 # Link the executable AnimationLibrary
 
-build AnimationLibrary: C_EXECUTABLE_LINKER__AnimationLibrary_Debug CMakeFiles/AnimationLibrary.dir/animator.c.o
+build AnimationLibrary: C_EXECUTABLE_LINKER__AnimationLibrary_Debug CMakeFiles/AnimationLibrary.dir/frame_drawer.c.o CMakeFiles/AnimationLibrary.dir/main_tester.c.o
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -mmacosx-version-min=15.0
   OBJECT_DIR = CMakeFiles/AnimationLibrary.dir
   POST_BUILD = :

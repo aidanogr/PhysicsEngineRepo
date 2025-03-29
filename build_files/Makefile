@@ -129,29 +129,29 @@ AnimationLibrary/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/AnimationLibrary.dir/build.make CMakeFiles/AnimationLibrary.dir/build
 .PHONY : AnimationLibrary/fast
 
-animator.o: animator.c.o
-.PHONY : animator.o
+frame_drawer.o: frame_drawer.c.o
+.PHONY : frame_drawer.o
 
 # target to build an object file
-animator.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AnimationLibrary.dir/build.make CMakeFiles/AnimationLibrary.dir/animator.c.o
-.PHONY : animator.c.o
+frame_drawer.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AnimationLibrary.dir/build.make CMakeFiles/AnimationLibrary.dir/frame_drawer.c.o
+.PHONY : frame_drawer.c.o
 
-animator.i: animator.c.i
-.PHONY : animator.i
+frame_drawer.i: frame_drawer.c.i
+.PHONY : frame_drawer.i
 
 # target to preprocess a source file
-animator.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AnimationLibrary.dir/build.make CMakeFiles/AnimationLibrary.dir/animator.c.i
-.PHONY : animator.c.i
+frame_drawer.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AnimationLibrary.dir/build.make CMakeFiles/AnimationLibrary.dir/frame_drawer.c.i
+.PHONY : frame_drawer.c.i
 
-animator.s: animator.c.s
-.PHONY : animator.s
+frame_drawer.s: frame_drawer.c.s
+.PHONY : frame_drawer.s
 
 # target to generate assembly for a file
-animator.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AnimationLibrary.dir/build.make CMakeFiles/AnimationLibrary.dir/animator.c.s
-.PHONY : animator.c.s
+frame_drawer.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AnimationLibrary.dir/build.make CMakeFiles/AnimationLibrary.dir/frame_drawer.c.s
+.PHONY : frame_drawer.c.s
 
 main_tester.o: main_tester.c.o
 .PHONY : main_tester.o
@@ -186,9 +186,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... AnimationLibrary"
-	@echo "... animator.o"
-	@echo "... animator.i"
-	@echo "... animator.s"
+	@echo "... frame_drawer.o"
+	@echo "... frame_drawer.i"
+	@echo "... frame_drawer.s"
 	@echo "... main_tester.o"
 	@echo "... main_tester.i"
 	@echo "... main_tester.s"

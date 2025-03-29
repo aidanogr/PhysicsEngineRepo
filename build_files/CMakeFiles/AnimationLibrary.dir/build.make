@@ -69,19 +69,19 @@ include CMakeFiles/AnimationLibrary.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/AnimationLibrary.dir/flags.make
 
-CMakeFiles/AnimationLibrary.dir/animator.c.o: CMakeFiles/AnimationLibrary.dir/flags.make
-CMakeFiles/AnimationLibrary.dir/animator.c.o: /Users/aidanogrady/OneDrive/Documents/Computer\ Science/C/AnimationLibrary/animator.c
-CMakeFiles/AnimationLibrary.dir/animator.c.o: CMakeFiles/AnimationLibrary.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/Users/aidanogrady/OneDrive/Documents/Computer Science/C/AnimationLibrary/build_files/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/AnimationLibrary.dir/animator.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/AnimationLibrary.dir/animator.c.o -MF CMakeFiles/AnimationLibrary.dir/animator.c.o.d -o CMakeFiles/AnimationLibrary.dir/animator.c.o -c "/Users/aidanogrady/OneDrive/Documents/Computer Science/C/AnimationLibrary/animator.c"
+CMakeFiles/AnimationLibrary.dir/frame_drawer.c.o: CMakeFiles/AnimationLibrary.dir/flags.make
+CMakeFiles/AnimationLibrary.dir/frame_drawer.c.o: /Users/aidanogrady/OneDrive/Documents/Computer\ Science/C/AnimationLibrary/frame_drawer.c
+CMakeFiles/AnimationLibrary.dir/frame_drawer.c.o: CMakeFiles/AnimationLibrary.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/Users/aidanogrady/OneDrive/Documents/Computer Science/C/AnimationLibrary/build_files/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/AnimationLibrary.dir/frame_drawer.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/AnimationLibrary.dir/frame_drawer.c.o -MF CMakeFiles/AnimationLibrary.dir/frame_drawer.c.o.d -o CMakeFiles/AnimationLibrary.dir/frame_drawer.c.o -c "/Users/aidanogrady/OneDrive/Documents/Computer Science/C/AnimationLibrary/frame_drawer.c"
 
-CMakeFiles/AnimationLibrary.dir/animator.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/AnimationLibrary.dir/animator.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/Users/aidanogrady/OneDrive/Documents/Computer Science/C/AnimationLibrary/animator.c" > CMakeFiles/AnimationLibrary.dir/animator.c.i
+CMakeFiles/AnimationLibrary.dir/frame_drawer.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/AnimationLibrary.dir/frame_drawer.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/Users/aidanogrady/OneDrive/Documents/Computer Science/C/AnimationLibrary/frame_drawer.c" > CMakeFiles/AnimationLibrary.dir/frame_drawer.c.i
 
-CMakeFiles/AnimationLibrary.dir/animator.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/AnimationLibrary.dir/animator.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/Users/aidanogrady/OneDrive/Documents/Computer Science/C/AnimationLibrary/animator.c" -o CMakeFiles/AnimationLibrary.dir/animator.c.s
+CMakeFiles/AnimationLibrary.dir/frame_drawer.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/AnimationLibrary.dir/frame_drawer.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/Users/aidanogrady/OneDrive/Documents/Computer Science/C/AnimationLibrary/frame_drawer.c" -o CMakeFiles/AnimationLibrary.dir/frame_drawer.c.s
 
 CMakeFiles/AnimationLibrary.dir/main_tester.c.o: CMakeFiles/AnimationLibrary.dir/flags.make
 CMakeFiles/AnimationLibrary.dir/main_tester.c.o: /Users/aidanogrady/OneDrive/Documents/Computer\ Science/C/AnimationLibrary/main_tester.c
@@ -99,13 +99,13 @@ CMakeFiles/AnimationLibrary.dir/main_tester.c.s: cmake_force
 
 # Object files for target AnimationLibrary
 AnimationLibrary_OBJECTS = \
-"CMakeFiles/AnimationLibrary.dir/animator.c.o" \
+"CMakeFiles/AnimationLibrary.dir/frame_drawer.c.o" \
 "CMakeFiles/AnimationLibrary.dir/main_tester.c.o"
 
 # External object files for target AnimationLibrary
 AnimationLibrary_EXTERNAL_OBJECTS =
 
-AnimationLibrary: CMakeFiles/AnimationLibrary.dir/animator.c.o
+AnimationLibrary: CMakeFiles/AnimationLibrary.dir/frame_drawer.c.o
 AnimationLibrary: CMakeFiles/AnimationLibrary.dir/main_tester.c.o
 AnimationLibrary: CMakeFiles/AnimationLibrary.dir/build.make
 AnimationLibrary: CMakeFiles/AnimationLibrary.dir/link.txt
