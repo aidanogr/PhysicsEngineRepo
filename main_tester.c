@@ -37,11 +37,13 @@ int main() {
 	return -1;
     }
 
-    err = initialize_animation();
+    //set_bounds(6377744.612457, -10, 6378238.000000, 10);
+    err = initialize_animation(0);
     if(err != 0) {
 	printf("error initializing animation: code %d\n", err);
     }
     if(err != 0) return -2;
+    simulate();
 
     //printf("number of masses: %d\n", number_of_masses);
 /*    x_min = -10;

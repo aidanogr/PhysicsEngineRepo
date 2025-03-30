@@ -1,9 +1,13 @@
 #include "animator.h"
+#include "frame_drawer.h"
+#include <stdlib.h>
 
+//wow this is really bad and someone should probably do something about that lol
+#define SIZE_OF_MASS_STAMP 640
 
 FILE* sim_file;
 
-
+double bounds[4] = {0};
 
 long int file_size = 0;
 
@@ -31,12 +35,91 @@ uint8_t open_ppm_sim(char* filename) {
  * this function should be called AFTER initialize_animation
  */
 uint8_t set_bounds(double min_x, double min_y, double max_x, double max_y) {
-    
+    bounds[0] = min_x;
+    bounds[1] = min_y;
+    bounds[2] = max_x;
+    bounds[3] = max_y;
+    return 0;
 }
 
+
 /**
- * crashes if sim_file is not initialized
+ * sets bounds automatically by focusing the window of animation on 1 mass 
+ */
+uint8_t calculate_bounds_about_mass(int64_t index_of_focused_mass) {
+    //TODO check this check and make it an assert, ensures number_of_masses has been read
+    printf("%d", ftell(sim_file) == sizeof(int)); 
+ 
+    fseek(sim_file, index_of_focused_mass*(SIZE_OF_MASS_STAMP), SEEK_CUR);
+    fseek(sim_file, sizeof(uint64_t) + sizeof(double) * 3, SEEK_CUR);
+    double position_x_min_buffer = 0; 
+    double position_y_min_buffer = 0;
+    double position_x_max_buffer = 0;
+    double position_y_max_buffer = 0;
+    double max_delta_x = 0;
+    double max_delta_y = 0;
+
+    fread(&position_x_min_buffer, sizeof(double), 1, sim_file);
+    fread(&position_y_min_buffer, sizeof(double), 1, sim_file);
+
+    position_x_max_buffer = position_x_min_buffer;
+    position_y_max_buffer = position_y_min_buffer;
+    
+ //   fread(&position_x_max_buffer, sizeof(double), 1, sim_file);
+  //  fread(&position_y_max_buffer, sizeof(double), 1, sim_file);
+
+    double buffer = 0;
+
+    fseek(sim_file, number_of_masses * SIZE_OF_MASS_STAMP - sizeof(double)*2 ,SEEK_CUR);
+    
+    while(ftell(sim_file) < file_size) {
+	//fseek(sim_file, sizeof(uint64_t) + sizeof(double)*3, SEEK_CUR);
+
+	fread(&buffer, sizeof(double), 1, sim_file);
+	if(buffer < position_x_min_buffer) position_x_min_buffer = buffer;
+	if(buffer > position_x_max_buffer) position_x_max_buffer = buffer;
+//	if(buffer - position_x_min_buffer > max_delta_x) {
+	    //max_delta_x = buffer - position_x_min_buffer;
+	//}
+
+	fread(&buffer, sizeof(double), 1, sim_file);
+	if(buffer < position_y_min_buffer) position_y_min_buffer = buffer;
+	if(buffer > position_y_max_buffer) position_y_max_buffer = buffer;
+
+	if(buffer - position_y_min_buffer > max_delta_y) {
+	    max_delta_y = buffer - position_y_min_buffer;
+	}
+
+	fseek(sim_file, number_of_masses * SIZE_OF_MASS_STAMP - sizeof(double)*2, SEEK_CUR);
+//	fseek(sim_file, sizeof(double) * 4, SEEK_CUR);
+
+    }
+    fseek(sim_file, sizeof(int), SEEK_SET);
+    bounds[0] = position_x_min_buffer;
+    bounds[1] = position_y_min_buffer;
+    bounds[2] = position_x_max_buffer;
+    bounds[3] = position_y_max_buffer;
+    //if(max_delta_x == 0) {
+//	bounds[0] = -10;
+//	bounds[2] = 10;
+ //   }
+    if(max_delta_y == 0) {
+	bounds[1] = -10;
+	bounds[3] = 10;
+    }
+
+    printf("\n%.2f %.2f %.2f %.2f", bounds[0], bounds[1], bounds[2], bounds[3]);
+
+    return 0;
+}
+
+
+/**
+ * crashes if sim_file is not initialized. Ensure open_ppm_sim() is called
+ *
  * @param index_of_focused_mass : pass negative 1 to manually set bounds using set_bounds(), call set_bounds() AFTER this function.
+ * index_of_focused_mass determines the minimum and maximum bounds of the animation by finding the minimum and maximum bounds in the psim file.
+ * If this is not ideal, manully set with set_bounds and calculate bounds some other way.
  */
 uint8_t initialize_animation(int64_t index_of_focused_mass) {
     assert(sim_file != NULL);
@@ -45,8 +128,13 @@ uint8_t initialize_animation(int64_t index_of_focused_mass) {
     file_size =  ftell(sim_file);
     fseek(sim_file, 0, SEEK_SET);
 
-    //TODO check for errors here, EXTREMELY IMPORTANT
+    //TODO check for errors here, EXTREMELY IMPORTANT. ALSO MAKE number_of_masses uint64_t OR SOMETHING
     fread(&number_of_masses, sizeof(int), 1, sim_file);
+    
+    assert(index_of_focused_mass >= -1 && index_of_focused_mass < number_of_masses);
+    if(index_of_focused_mass != -1) {
+	calculate_bounds_about_mass(index_of_focused_mass);
+    }
 
     return 0;
 }
@@ -91,6 +179,12 @@ void print_simulated_mass(const simulated_mass_t *mass) {
     printf("  Velocity (vx, vy, vz): (%.6f, %.6f, %.6f)\n", mass->vxs, mass->vys, mass->vzs);
 }
 
+uint8_t convert_to_mp4() {
+ //   ffmpeg -framerate 10 -i int_file_%d.ppm -c:v libx264 -crf 25 -vf "scale=500:500,format=yuv420p" -movflags +faststart output.mp4
+    system("ffmpeg -framerate 10 -i \"/Users/aidanogrady/OneDrive/Documents/Computer Science/C/AnimationLibrary/animation_files/int_file_%d.ppm\" -c:v libx264 -crf 25 -vf \"scale=500:500,format=yuv420p\" -movflags +faststart -y output.mp4");
+    return 0;
+}
+
 int simulate() {
 
     simulated_mass_t masses_at_timestamp[number_of_masses];
@@ -103,7 +197,8 @@ int simulate() {
 	    break;
 	}
 	
-	initialize_frame(6377744.612457, -10, 6378238.000000, 10, number_of_masses);
+	//initialize_frame(6377744.612457, -10, 6378238.000000, 10, number_of_masses);
+	initialize_frame(bounds[0], bounds[1], bounds[2], bounds[3], number_of_masses);
 	draw_tic_marks(4, 4, 10);
 	
 
@@ -129,6 +224,7 @@ int simulate() {
     printf("%.3f", double_buffer);   
     */
     close_ppm_sim();
-
+    convert_to_mp4();
+    return 0;
 }
 

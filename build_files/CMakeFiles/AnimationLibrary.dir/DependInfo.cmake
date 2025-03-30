@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/Users/aidanogrady/OneDrive/Documents/Computer Science/C/AnimationLibrary/animator.c" "CMakeFiles/AnimationLibrary.dir/animator.c.o" "gcc" "CMakeFiles/AnimationLibrary.dir/animator.c.o.d"
   "/Users/aidanogrady/OneDrive/Documents/Computer Science/C/AnimationLibrary/frame_drawer.c" "CMakeFiles/AnimationLibrary.dir/frame_drawer.c.o" "gcc" "CMakeFiles/AnimationLibrary.dir/frame_drawer.c.o.d"
   "/Users/aidanogrady/OneDrive/Documents/Computer Science/C/AnimationLibrary/main_tester.c" "CMakeFiles/AnimationLibrary.dir/main_tester.c.o" "gcc" "CMakeFiles/AnimationLibrary.dir/main_tester.c.o.d"
   )
