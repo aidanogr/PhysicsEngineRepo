@@ -12,6 +12,7 @@
 FILE* sim_file;
 double bounds[4] = {0};
 long int file_size = 0;
+int framerate = 0;
 
 /*
  * Must always call this function before using any other animation function calls
@@ -198,7 +199,10 @@ void print_simulated_mass(const simulated_mass_t *mass) {
 
 uint8_t convert_to_mp4() {
  //   ffmpeg -framerate 10 -i int_file_%d.ppm -c:v libx264 -crf 25 -vf "scale=500:500,format=yuv420p" -movflags +faststart output.mp4
-    system("ffmpeg -framerate 10 -i \"/Users/aidanogrady/OneDrive/Documents/Computer Science/C/AnimationLibrary/animation_files/int_file_%d.ppm\" -c:v libx264 -crf 25 -vf \"scale=500:500,format=yuv420p\" -movflags +faststart -y output.mp4");
+    assert(framerate >= 0);
+    char command[500];
+    sprintf(command, "ffmpeg -framerate %d -i \"/Users/aidanogrady/OneDrive/Documents/Computer Science/C/AnimationLibrary/animation_files/int_file_%%d.ppm\" -c:v libx264 -crf 25 -vf \"scale=500:500,format=yuv420p\" -movflags +faststart -y output.mp4", framerate);
+    system(command);
     return 0;
 }
 
@@ -207,45 +211,29 @@ int simulate() {
     simulated_mass_t masses_at_timestamp[number_of_masses];
     int counter = 0;
     char filename[256];
-
+    double last_time_stamp = 0; 
     while(1) {
 	int err	= read_next_timestamp(masses_at_timestamp);
 	if(err == -1) {
 	    break;
 	}
 	
-	//initialize_frame(6377744.612457, -10, 6378238.000000, 10, number_of_masses);
 	initialize_frame(bounds[0], bounds[1], bounds[2], bounds[3], number_of_masses);
 	draw_tic_marks(4, 4, 10);
 	
 
 
 	for(int i = 0; i < number_of_masses; i++) {
-	   // print_simulated_mass(&(masses_at_timestamp[i]));
 	    draw_large_mass(10, 200, 200, 0, masses_at_timestamp[i].pxs, masses_at_timestamp[i].pys);
-	    printf("\n%.2f, %.2f\n", masses_at_timestamp[i].pxs, masses_at_timestamp[i].pys);
 	}
+	last_time_stamp = masses_at_timestamp[0].timestamp;
 	sprintf(filename, "/Users/aidanogrady/OneDrive/Documents/Computer Science/C/AnimationLibrary/animation_files/int_file_%d.ppm", counter);
 	save_ppm(filename, image);
 	counter++;
     }
     printf("counts during simulation: %d", counter);
-    /*
-    uint64_t index = 0;
-    double double_buffer = 0;
-    fread(&double_buffer, sizeof(double), 1, sim_file);
-    printf("%.3f", double_buffer);
-    fread(&index, sizeof(uint64_t), 1, sim_file);
-    printf("%llu\n", index);
-    
-
-
-
-
-    fread(&double_buffer, sizeof(double), 1, sim_file);
-    printf("%.3f", double_buffer);   
-    */
     close_ppm_sim();
+    framerate = counter / last_time_stamp;
     convert_to_mp4();
     return 0;
 }
