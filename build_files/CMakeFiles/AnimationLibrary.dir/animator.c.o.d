@@ -94,5 +94,6 @@ CMakeFiles/AnimationLibrary.dir/animator.c.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/assert.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/_assert.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/_static_assert.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/math.h \
   /Users/aidanogrady/OneDrive/Documents/Computer\ Science/C/AnimationLibrary/frame_drawer.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/strings.h

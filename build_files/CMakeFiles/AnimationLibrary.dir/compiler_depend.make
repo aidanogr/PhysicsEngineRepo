@@ -43,6 +43,7 @@ CMakeFiles/AnimationLibrary.dir/animator.c.o: /Users/aidanogrady/OneDrive/Docume
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/malloc/_malloc.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/malloc/_malloc_type.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/malloc/_ptrcheck.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/math.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/secure/_common.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/secure/_stdio.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/secure/_string.h \
@@ -235,6 +236,7 @@ CMakeFiles/AnimationLibrary.dir/main_tester.c.o: /Users/aidanogrady/OneDrive/Doc
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/malloc/_malloc.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/malloc/_malloc_type.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/malloc/_ptrcheck.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/math.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/secure/_common.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/secure/_stdio.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/secure/_string.h \
@@ -292,15 +294,15 @@ CMakeFiles/AnimationLibrary.dir/main_tester.c.o: /Users/aidanogrady/OneDrive/Doc
   /Users/aidanogrady/OneDrive/Documents/Computer\ Science/C/AnimationLibrary/frame_drawer.h
 
 
+/Users/aidanogrady/OneDrive/Documents/Computer\ Science/C/AnimationLibrary/frame_drawer.h:
+
 /Users/aidanogrady/OneDrive/Documents/Computer\ Science/C/AnimationLibrary/animator.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/wait.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/resource.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/stdio.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/appleapiopts.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/resource.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_types/_wchar_t.h:
 
@@ -414,6 +416,10 @@ CMakeFiles/AnimationLibrary.dir/main_tester.c.o: /Users/aidanogrady/OneDrive/Doc
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/machine/endian.h:
 
+/Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/appleapiopts.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/math.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_types/_id_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/mach/machine/_structs.h:
@@ -459,8 +465,6 @@ CMakeFiles/AnimationLibrary.dir/main_tester.c.o: /Users/aidanogrady/OneDrive/Doc
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/malloc/_malloc_type.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/arm/_endian.h:
-
-/Users/aidanogrady/OneDrive/Documents/Computer\ Science/C/AnimationLibrary/frame_drawer.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/_stdlib.h:
 

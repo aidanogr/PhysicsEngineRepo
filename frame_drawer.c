@@ -108,6 +108,7 @@ uint8_t initialize_frame(double x_min_temp, double y_min_temp, double x_max_temp
     change_background_color(0, 0, 0);
     boundary_flags &= 0b0;
     
+    
     return 0;
 }
 
@@ -325,7 +326,7 @@ uint8_t draw_large_mass(uint8_t radius, uint8_t RED, uint8_t GREEN, uint8_t BLUE
 	    if( (mapped_x - i)*(mapped_x - i) + (mapped_y - j)*(mapped_y - j) <= radius_squared) {
 		error = draw_point_mass_by_pixel(RED, GREEN, BLUE, i, j);
 		if(error) {
-		    printf("error drawing large mass");
+		    //printf("error drawing large mass");
 		}
 	    }
 	}

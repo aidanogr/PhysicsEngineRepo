@@ -44,6 +44,7 @@ CMakeFiles/AnimationLibrary.dir/animator.c.o
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/malloc/_malloc.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/malloc/_malloc_type.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/malloc/_ptrcheck.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/math.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/secure/_common.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/secure/_stdio.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/secure/_string.h
@@ -238,6 +239,7 @@ CMakeFiles/AnimationLibrary.dir/main_tester.c.o
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/malloc/_malloc.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/malloc/_malloc_type.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/malloc/_ptrcheck.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/math.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/secure/_common.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/secure/_stdio.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/secure/_string.h

@@ -1,14 +1,16 @@
 #include "animator.h"
 #include "frame_drawer.h"
-#include <stdlib.h>
 
-//wow this is really bad and someone should probably do something about that lol
-#define SIZE_OF_MASS_STAMP 640
+//wow this is really large, someone should probably do something about that lol
+//
+
+#define SIZE_OF_MASS_STAMP_BYTES sizeof(simulated_mass_t)
+#define POSITION_OFFSET_BYTES sizeof(uint64_t) + sizeof(double)*3
+#define SIZE_OF_POSITIONS_2D_BYTES sizeof(double) * 2
+
 
 FILE* sim_file;
-
 double bounds[4] = {0};
-
 long int file_size = 0;
 
 /*
@@ -24,7 +26,6 @@ uint8_t open_ppm_sim(char* filename) {
     if(sim_file == NULL) {
 	return -2;
     }
-
 
     return 0;
 }
@@ -43,15 +44,17 @@ uint8_t set_bounds(double min_x, double min_y, double max_x, double max_y) {
 }
 
 
+//TODO this function is getting a little long; either make it more concise or break it up
 /**
  * sets bounds automatically by focusing the window of animation on 1 mass 
  */
 uint8_t calculate_bounds_about_mass(int64_t index_of_focused_mass) {
     //TODO check this check and make it an assert, ensures number_of_masses has been read
-    printf("%d", ftell(sim_file) == sizeof(int)); 
+    assert(ftell(sim_file) == sizeof(int)); 
  
-    fseek(sim_file, index_of_focused_mass*(SIZE_OF_MASS_STAMP), SEEK_CUR);
-    fseek(sim_file, sizeof(uint64_t) + sizeof(double) * 3, SEEK_CUR);
+    //goto start of indexed mass
+    fseek(sim_file, index_of_focused_mass*(SIZE_OF_MASS_STAMP_BYTES) + POSITION_OFFSET_BYTES, SEEK_CUR);
+
     double position_x_min_buffer = 0; 
     double position_y_min_buffer = 0;
     double position_x_max_buffer = 0;
@@ -64,51 +67,65 @@ uint8_t calculate_bounds_about_mass(int64_t index_of_focused_mass) {
 
     position_x_max_buffer = position_x_min_buffer;
     position_y_max_buffer = position_y_min_buffer;
-    
- //   fread(&position_x_max_buffer, sizeof(double), 1, sim_file);
-  //  fread(&position_y_max_buffer, sizeof(double), 1, sim_file);
-
+ 
+    //printf("\n%.2f,%.2f,%.2f,%.2f\n", position_x_min_buffer, position_y_min_buffer, position_x_max_buffer, position_y_max_buffer);
     double buffer = 0;
-
-    fseek(sim_file, number_of_masses * SIZE_OF_MASS_STAMP - sizeof(double)*2 ,SEEK_CUR);
+    int counter= 0;
+    fseek(sim_file, number_of_masses * SIZE_OF_MASS_STAMP_BYTES - SIZE_OF_POSITIONS_2D_BYTES ,SEEK_CUR);
     
-    while(ftell(sim_file) < file_size) {
-	//fseek(sim_file, sizeof(uint64_t) + sizeof(double)*3, SEEK_CUR);
+    while(fread(&buffer, sizeof(double), 1, sim_file) == 1) {
+
+	if(fabs(buffer - position_x_min_buffer) > max_delta_x) {
+	    max_delta_x = buffer - position_x_min_buffer;
+	}
+	if(buffer < position_x_min_buffer){
+	    position_x_min_buffer = buffer;
+	}
+	if(buffer > position_x_max_buffer) {
+	    position_x_max_buffer = buffer;
+	}
+	printf("\n%.2f\n", buffer);
 
 	fread(&buffer, sizeof(double), 1, sim_file);
-	if(buffer < position_x_min_buffer) position_x_min_buffer = buffer;
-	if(buffer > position_x_max_buffer) position_x_max_buffer = buffer;
-//	if(buffer - position_x_min_buffer > max_delta_x) {
-	    //max_delta_x = buffer - position_x_min_buffer;
-	//}
-
-	fread(&buffer, sizeof(double), 1, sim_file);
-	if(buffer < position_y_min_buffer) position_y_min_buffer = buffer;
-	if(buffer > position_y_max_buffer) position_y_max_buffer = buffer;
-
-	if(buffer - position_y_min_buffer > max_delta_y) {
+	if(fabs(buffer - position_y_min_buffer) > max_delta_y) {
 	    max_delta_y = buffer - position_y_min_buffer;
 	}
-
-	fseek(sim_file, number_of_masses * SIZE_OF_MASS_STAMP - sizeof(double)*2, SEEK_CUR);
-//	fseek(sim_file, sizeof(double) * 4, SEEK_CUR);
-
+	if(buffer < position_y_min_buffer){
+	    position_y_min_buffer = buffer; 
+	}
+	if(buffer > position_y_max_buffer){
+	    position_y_max_buffer = buffer;
+	}
+	printf("\n%.2f\n", buffer);
+	fseek(sim_file, number_of_masses * SIZE_OF_MASS_STAMP_BYTES - SIZE_OF_POSITIONS_2D_BYTES, SEEK_CUR);
+	counter ++;
     }
-    fseek(sim_file, sizeof(int), SEEK_SET);
+    printf("\nCounts during bounds calculation: %d", counter);
+
     bounds[0] = position_x_min_buffer;
     bounds[1] = position_y_min_buffer;
     bounds[2] = position_x_max_buffer;
     bounds[3] = position_y_max_buffer;
-    //if(max_delta_x == 0) {
-//	bounds[0] = -10;
-//	bounds[2] = 10;
- //   }
+
+
+    //if bounds on an axis are zero, set arbitrary bounds
+    if(max_delta_x == 0) {
+	bounds[0] = -10;
+	bounds[2] = 10;
+    }
     if(max_delta_y == 0) {
 	bounds[1] = -10;
 	bounds[3] = 10;
     }
 
-    printf("\n%.2f %.2f %.2f %.2f", bounds[0], bounds[1], bounds[2], bounds[3]);
+
+   printf("\n%.2f %.2f %.2f %.2f", bounds[0], bounds[1], bounds[2], bounds[3]);
+    //
+    //reset file pointer to start of file, shifted by header
+    //file pointer might go past EOF which is okay, but we need to reset it if that's the case
+//    clearerr(sim_file);
+    fseek(sim_file, sizeof(int), SEEK_SET);
+
 
     return 0;
 }
@@ -206,11 +223,13 @@ int simulate() {
 	for(int i = 0; i < number_of_masses; i++) {
 	   // print_simulated_mass(&(masses_at_timestamp[i]));
 	    draw_large_mass(10, 200, 200, 0, masses_at_timestamp[i].pxs, masses_at_timestamp[i].pys);
+	    printf("\n%.2f, %.2f\n", masses_at_timestamp[i].pxs, masses_at_timestamp[i].pys);
 	}
 	sprintf(filename, "/Users/aidanogrady/OneDrive/Documents/Computer Science/C/AnimationLibrary/animation_files/int_file_%d.ppm", counter);
 	save_ppm(filename, image);
 	counter++;
     }
+    printf("counts during simulation: %d", counter);
     /*
     uint64_t index = 0;
     double double_buffer = 0;
@@ -218,6 +237,9 @@ int simulate() {
     printf("%.3f", double_buffer);
     fread(&index, sizeof(uint64_t), 1, sim_file);
     printf("%llu\n", index);
+    
+
+
 
 
     fread(&double_buffer, sizeof(double), 1, sim_file);

@@ -31,13 +31,14 @@ void test_multiple_coordinate_systems() {
 
 
 int main() {
+
     int err = open_ppm_sim("/Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer Science/C/PhysicsEngineRepo/Engine_v0_11/Simulations/Earth_Human_Gravity.psim");
    if(err != 0) {
 	printf("error opening sim file: code %d\n", err);
 	return -1;
     }
 
-    //set_bounds(6377744.612457, -10, 6378238.000000, 10);
+//    set_bounds(6377744.612457, -10, 6378238.000000, 10);
     err = initialize_animation(0);
     if(err != 0) {
 	printf("error initializing animation: code %d\n", err);
@@ -63,6 +64,8 @@ int main() {
     test_multiple_coordinate_systems();
     */
 
+    printf("%lu", sizeof(double)*9 + sizeof(uint64_t));
+    printf("\n%lu\n", sizeof(int));
 } 
 
 

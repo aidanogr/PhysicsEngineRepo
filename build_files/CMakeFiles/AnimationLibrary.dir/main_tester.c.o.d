@@ -95,4 +95,5 @@ CMakeFiles/AnimationLibrary.dir/main_tester.c.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/assert.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/_assert.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/_static_assert.h \
-  /Users/aidanogrady/OneDrive/Documents/Computer\ Science/C/AnimationLibrary/animator.h
+  /Users/aidanogrady/OneDrive/Documents/Computer\ Science/C/AnimationLibrary/animator.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/math.h
