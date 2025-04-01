@@ -6,6 +6,7 @@
 #define SIMULATION_HANDLER_H
 
 #include "UniverseHandler.h"
+#include <stdio.h>
 
 typedef struct{
     Universe* universe;

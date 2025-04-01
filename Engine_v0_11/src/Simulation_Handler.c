@@ -29,7 +29,7 @@ int init_simulation_tracker(char* path, Universe* universe, Simulation_Tracker* 
         printf("Error opening simulation tracker file\n");
         return -1;
     }
-    fwrite(&universe->number_of_masses, sizeof(uint64_t), 1,simulation_tracker_file);
+    fwrite(&universe->number_of_masses, sizeof(int), 1,simulation_tracker_file);
     simulation_tracker.tracker_file = simulation_tracker_file;
     *sim = simulation_tracker;
     return 0;
@@ -77,6 +77,7 @@ int terminate_simulation_tracker(Simulation_Tracker* simulation_tracker) {
     if (simulation_tracker->tracker_file == NULL) {
         return -1;
     }
+
     fflush(simulation_tracker->tracker_file);
     int result = fclose(simulation_tracker->tracker_file);
     if (result == 0) {

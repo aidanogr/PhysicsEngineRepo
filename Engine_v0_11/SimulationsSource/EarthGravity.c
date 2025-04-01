@@ -55,7 +55,7 @@ int main() {
     printMasses(&universe);
 
    // char* filename = "Earth_Human_Gravity.psim";
-    char* path = "../Simulations/Earth_Human_Gravity.psim";
+    char* path = "/Users/aidanogrady/OneDrive/Documents/Computer Science/C/PhysicsEngineRepo/Engine_v0_11/Simulations/Earth_Human_Gravity.psim";
     Simulation_Tracker simulation;
     init_simulation_tracker(path, &universe, &simulation);
     double timestamp = 0;
