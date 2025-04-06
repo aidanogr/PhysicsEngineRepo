@@ -32,7 +32,7 @@ void test_multiple_coordinate_systems() {
 
 int main() {
 
-    int err = open_ppm_sim("/Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer Science/C/PhysicsEngineRepo/Engine_v0_11/Simulations/Earth_Human_Gravity.psim");
+    int err = open_ppm_sim("/Users/aidanogrady/Documents/GitHub/PhysicsEngineRepo/Engine_v0_11/Simulations/Earth_Human_Gravity.psim");
    if(err != 0) {
 	printf("error opening sim file: code %d\n", err);
 	return -1;

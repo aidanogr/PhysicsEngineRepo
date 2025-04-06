@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include <_strings.h>
+#include <strings.h>
 #include "frame_drawer.h"
 
 

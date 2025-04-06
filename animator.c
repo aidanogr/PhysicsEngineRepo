@@ -201,8 +201,11 @@ uint8_t convert_to_mp4() {
  //   ffmpeg -framerate 10 -i int_file_%d.ppm -c:v libx264 -crf 25 -vf "scale=500:500,format=yuv420p" -movflags +faststart output.mp4
     assert(framerate >= 0);
     char command[500];
-    sprintf(command, "ffmpeg -framerate %d -i \"/Users/aidanogrady/OneDrive/Documents/Computer Science/C/AnimationLibrary/animation_files/int_file_%%d.ppm\" -c:v libx264 -crf 25 -vf \"scale=500:500,format=yuv420p\" -movflags +faststart -y output.mp4", framerate);
-    system(command);
+    sprintf(command, "ffmpeg -framerate %d -i \"./animation_files/int_file_%%d.ppm\" -c:v libx264 -crf 25 -vf \"scale=500:500,format=yuv420p\" -movflags +faststart -y output.mp4", framerate);
+    if(system(command) != 0) {
+	printf("FFMPEG FAILURE");
+	return -1;
+    }
     return 0;
 }
 
@@ -227,7 +230,7 @@ int simulate() {
 	    draw_large_mass(10, 200, 200, 0, masses_at_timestamp[i].pxs, masses_at_timestamp[i].pys);
 	}
 	last_time_stamp = masses_at_timestamp[0].timestamp;
-	sprintf(filename, "/Users/aidanogrady/OneDrive/Documents/Computer Science/C/AnimationLibrary/animation_files/int_file_%d.ppm", counter);
+	sprintf(filename, "./animation_files/int_file_%d.ppm", counter);
 	save_ppm(filename, image);
 	counter++;
     }
