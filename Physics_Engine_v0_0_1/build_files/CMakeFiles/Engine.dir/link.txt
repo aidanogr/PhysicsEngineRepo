@@ -1,0 +1,1 @@
+/usr/bin/cc -g -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/Engine.dir/src/Simulation_Handler.c.o CMakeFiles/Engine.dir/src/UniverseHandler.c.o CMakeFiles/Engine.dir/src/Utility.c.o CMakeFiles/Engine.dir/SimulationsSource/EarthGravity.c.o -o Engine

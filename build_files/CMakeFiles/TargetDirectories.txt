@@ -1,3 +1,0 @@
-/Users/aidanogrady/Documents/GitHub/AnimationLibrary/build_files/CMakeFiles/AnimationLibrary.dir
-/Users/aidanogrady/Documents/GitHub/AnimationLibrary/build_files/CMakeFiles/edit_cache.dir
-/Users/aidanogrady/Documents/GitHub/AnimationLibrary/build_files/CMakeFiles/rebuild_cache.dir
