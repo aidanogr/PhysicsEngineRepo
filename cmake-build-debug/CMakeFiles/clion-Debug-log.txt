@@ -1,0 +1,4 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -DCMAKE_C_COMPILER=/usr/bin/gcc -G Ninja -S "/Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer Science/C/AnimationLibrary" -B "/Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer Science/C/AnimationLibrary/cmake-build-debug"
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/aidanogrady/Library/CloudStorage/OneDrive-Personal/Documents/Computer Science/C/AnimationLibrary/cmake-build-debug
