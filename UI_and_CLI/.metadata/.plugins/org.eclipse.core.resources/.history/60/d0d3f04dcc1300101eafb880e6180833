@@ -1,0 +1,150 @@
+package cli_drivers;
+
+import java.io.File;
+import java.util.Scanner;
+
+public class Animation_CLI_Main {
+
+	public static String usage = """	
+	 Usage:   physics_animate 
+			  -f <simulation file path>\n
+			  -bounds <x_min>,<y_min>,<x_max>,<y_max> (no spaces) or <focused masses index>\n
+			  -o <output file path> \n 
+			  -k (use flag to keep intermediate files)  \n
+		 """;
+	
+	
+	
+	public static String simulation_file_path = "";
+	public static int index_of_focused_mass = -1;
+	public static double[] bounds = {0,0,0,0};
+	public static String path_to_output_file = "output.mp4";
+	public static boolean keep_intermediate_files = false;
+	
+	public static boolean cli_failed = false;
+	
+	
+	
+
+	//primarily used for unit testing or batch simulations
+	public static void resetClassVariables() {
+		simulation_file_path = "";
+		index_of_focused_mass = -1;
+		bounds[0] = 0;
+		bounds[1] = 0;
+		bounds[2] = 0;
+		bounds[3] = 0;
+		path_to_output_file = "output.mp4";
+		keep_intermediate_files = false;
+		cli_failed = false;
+	}
+	
+	
+	//sets state variables based on commmand line arguments 
+	public static void handleArgs(String[] args) {
+			if(args.length < 3) {
+			System.out.println("Bad usage: missing arguments\n" + usage);
+			cli_failed = true;
+			return;
+		}
+		
+		/* BOUNDS FLAGS */
+		for(int i = 0; i < args.length; i++) {
+			if(args[i].equals("-bounds")) {
+				if(i + 1 >= args.length) {
+					cli_failed = true;
+					System.out.println("Bad usage: misused bounds flag (err 1) " + usage);
+					return;
+				}
+				//TODO add support for multiple focused masses
+				String bounds_str = args[i+1];
+				if(bounds_str.contains(",")) {
+					Scanner bounds_scanner = new Scanner(bounds_str);
+					bounds_scanner.useDelimiter(",");
+					int counter = 0;
+					while(bounds_scanner.hasNext()) {
+						try {
+							bounds[counter] = bounds_scanner.nextDouble();
+							counter++;
+						}
+						catch(Exception e) {
+							cli_failed = true;
+							System.out.println("Bad usage: misused bounds flag (err 2)" + usage); 
+							bounds_scanner.close();
+							return;					
+						}
+					}
+					bounds_scanner.close();
+				}
+				else {
+					try {
+						index_of_focused_mass = Integer.valueOf(bounds_str);
+					}
+					catch(Exception e) {
+						cli_failed = true;
+						System.out.println("Bad usage: misused bounds flag (err 3)" + usage); 
+						return;
+					}
+				}
+			}
+		}
+		
+		/* OUTPUT FILE FLAG */
+		for(int i = 0; i < args.length; i++) {
+			if(args[i].equals("-o")) {
+				if(i + 1 >= args.length) {
+					cli_failed = true;
+					System.out.println("Bad usage: misused output file flag (err 1) " + usage);
+					return;
+				}
+				path_to_output_file = args[i+1];
+			}
+		}
+		
+		/* SIM FILE INPUT FLAG */
+		for(int i = 0; i < args.length; i++) {
+			if(args[i].equals("-f")) {
+				if(i + 1 >= args.length) {
+					System.out.println("Bad usage: misused file input flag (err 1) " + usage);
+					cli_failed = true;
+					return;
+				}
+				simulation_file_path = args[i+1];
+			}
+		}
+		if(simulation_file_path.equals("")) {
+			System.out.println("Bad usage: must use -f to specify input file. (err 2) \n " + usage);
+			cli_failed = true;
+			return;
+		}
+		
+		/* KEEP INTERMEDIATE FILES FLAG */
+		for(int i = 0; i < args.length; i++) {
+			if(args[i].equals("-k")) {
+				keep_intermediate_files = true;
+			}
+		}
+		
+	}
+	
+	/**
+	 * 	Usage: physics_animate 
+		  -f <simulation file path>\n
+		  -bounds <x_min>,<y_min>,<x_max>,<y_max> (no spaces) or <focused masses index>\n
+		  -o <output file path> \n 
+		  -k (use flag to keep intermediate files)  \n
+	 */
+	public static void main(String[] args) {
+
+	
+		handleArgs(args);
+		
+		
+		
+		System.out.println("Output file: " + path_to_output_file + "\nbounds (x,y,x,y): " + bounds[0] + ',' +bounds[1]
+				+ ',' + bounds[2] + ',' + bounds[3] + 
+				"\nSelected mass: " + index_of_focused_mass);
+		
+	}
+
+}

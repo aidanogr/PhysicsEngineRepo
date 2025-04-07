@@ -1,0 +1,89 @@
+package cli_testers;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+import cli_drivers.Animation_CLI_Main;
+
+class AnimationTester {
+
+	@Test
+	void functional_test1() {
+		Animation_CLI_Main.resetClassVariables();
+		Animation_CLI_Main.main(new String[]{"-f", "Example.psim", "-bounds", "4,4,10,10", "-o", "example.mp4" });
+		assert(Animation_CLI_Main.bounds[0] == 4);
+		assert(Animation_CLI_Main.bounds[1] == 4);
+		assert(Animation_CLI_Main.bounds[2] == 10);
+		assert(Animation_CLI_Main.bounds[3] == 10);
+		assert(Animation_CLI_Main.index_of_focused_mass == -1);
+		assert(Animation_CLI_Main.keep_intermediate_files == false);
+		assert(Animation_CLI_Main.simulation_file_path.equals("Example.psim"));
+		assert(Animation_CLI_Main.path_to_output_file.equals("example.mp4"));
+		assert(Animation_CLI_Main.cli_failed == false);
+	}
+
+
+	//same as test1 but checks intermediate files are kept
+	@Test
+	void functional_test2() {
+		Animation_CLI_Main.resetClassVariables();
+		Animation_CLI_Main.main(new String[]{"-f", "Example.psim", "-bounds", "4,4,10,10", "-o", "example.mp4", "-k" });
+		assert(Animation_CLI_Main.bounds[0] == 4);
+		assert(Animation_CLI_Main.bounds[1] == 4);
+		assert(Animation_CLI_Main.bounds[2] == 10);
+		assert(Animation_CLI_Main.bounds[3] == 10);
+		assert(Animation_CLI_Main.index_of_focused_mass == -1);
+		assert(Animation_CLI_Main.keep_intermediate_files == true);
+		assert(Animation_CLI_Main.simulation_file_path.equals("Example.psim"));
+		assert(Animation_CLI_Main.path_to_output_file.equals("example.mp4"));
+		assert(Animation_CLI_Main.cli_failed == false);
+	}
+	
+
+	//stress test 1-3 check what happends when flags are put at end of command (should fail unless -k)
+	@Test
+	void stress_test_1() {
+		Animation_CLI_Main.resetClassVariables();
+		Animation_CLI_Main.main(new String[]{"-f", "Example.psim", "-bounds", "4,4,10,10", "-o"});
+		assert(Animation_CLI_Main.cli_failed == true);
+	}
+	@Test
+	void stress_test_2() {
+		Animation_CLI_Main.resetClassVariables();
+		Animation_CLI_Main.main(new String[]{"Example.psim", "-bounds", "4,4,10,10", "-f"});
+		assert(Animation_CLI_Main.cli_failed == true);
+	}
+
+	@Test
+	void stress_test_3() {
+		Animation_CLI_Main.resetClassVariables();
+		Animation_CLI_Main.main(new String[]{"-f", "Example.psim", "-bounds", "4,4,10,10", "-o"});
+		assert(Animation_CLI_Main.cli_failed == true);
+	}
+
+
+	//tests for bad bounds argument
+	@Test
+	void stress_test_4() {
+		Animation_CLI_Main.resetClassVariables();
+		Animation_CLI_Main.main(new String[]{"Example.psim", "-bounds", "4,4,10,1f", "-f", "in.psim"});
+		assert(Animation_CLI_Main.cli_failed == true);
+	}
+	
+	//cli should fail if -f is not specified
+	@Test
+	void stress_test_5() {
+		Animation_CLI_Main.resetClassVariables();
+		Animation_CLI_Main.main(new String[]{"Example.psim", "-bounds", "4,4,10,10"});
+		assert(Animation_CLI_Main.cli_failed == true);	
+	}
+	
+	//cli should fail if -f arg is not of type psim
+	@Test
+	void stress_test_6() {
+		Animation_CLI_Main.resetClassVariables();
+		Animation_CLI_Main.main(new String[]{"Example.psim", "-bounds", "4,4,10,10", "-f", "Example.txt"});
+		assert(Animation_CLI_Main.cli_failed == true);	
+	}
+}

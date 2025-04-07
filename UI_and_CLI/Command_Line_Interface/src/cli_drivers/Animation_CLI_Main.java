@@ -5,36 +5,44 @@ import java.util.Scanner;
 
 public class Animation_CLI_Main {
 
+	public static String usage = """	
+	 \nUsage:   physics_animate 
+			  -f <simulation file path>\n
+			  -bounds <x_min>,<y_min>,<x_max>,<y_max> (no spaces) or <focused masses index>\n
+			  -o <output file path> \n 
+			  -k (use flag to keep intermediate files)  \n
+		 """;
+	
+	
+	
 	public static String simulation_file_path = "";
 	public static int index_of_focused_mass = -1;
 	public static double[] bounds = {0,0,0,0};
-	public static String path_to_output_file = "";
+	public static String path_to_output_file = "output.mp4";
 	public static boolean keep_intermediate_files = false;
-
+	
 	public static boolean cli_failed = false;
 	
-	/**
-	 * 	Usage: physics_animate 
-		  -f <simulation file path>\n
-		  -bounds <x_min>,<y_min>,<x_max>,<y_max> (no spaces) or <focused masses index>\n
-		  -o <output file path> \n 
-		  -k (use flag to keep intermediate files)  \n
+	
+	
 
-	 */
-	public static void main(String[] args) {
-
-		String usage = """	
-		 Usage:   physics_animate 
-				  -f <simulation file path>\n
-				  -bounds <x_min>,<y_min>,<x_max>,<y_max> (no spaces) or <focused masses index>\n
-				  -o <output file path> \n 
-				  -k (use flag to keep intermediate files)  \n
-			 """;
-		
+	//primarily used for unit testing or batch simulations
+	public static void resetClassVariables() {
+		simulation_file_path = "";
 		index_of_focused_mass = -1;
+		bounds[0] = 0;
+		bounds[1] = 0;
+		bounds[2] = 0;
+		bounds[3] = 0;
 		path_to_output_file = "output.mp4";
-		
-		if(args.length < 3) {
+		keep_intermediate_files = false;
+		cli_failed = false;
+	}
+	
+	
+	//sets state variables based on commmand line arguments 
+	public static void handleArgs(String[] args) {
+			if(args.length < 3) {
 			System.out.println("Bad usage: missing arguments\n" + usage);
 			cli_failed = true;
 			return;
@@ -46,6 +54,7 @@ public class Animation_CLI_Main {
 				if(i + 1 >= args.length) {
 					cli_failed = true;
 					System.out.println("Bad usage: misused bounds flag (err 1) " + usage);
+					return;
 				}
 				//TODO add support for multiple focused masses
 				String bounds_str = args[i+1];
@@ -54,9 +63,18 @@ public class Animation_CLI_Main {
 					bounds_scanner.useDelimiter(",");
 					int counter = 0;
 					while(bounds_scanner.hasNext()) {
-						bounds[counter] = bounds_scanner.nextDouble();
-						counter++;
+						try {
+							bounds[counter] = bounds_scanner.nextDouble();
+							counter++;
+						}
+						catch(Exception e) {
+							cli_failed = true;
+							System.out.println("Bad usage: misused bounds flag (err 2)" + usage); 
+							bounds_scanner.close();
+							return;					
+						}
 					}
+					bounds_scanner.close();
 				}
 				else {
 					try {
@@ -64,11 +82,16 @@ public class Animation_CLI_Main {
 					}
 					catch(Exception e) {
 						cli_failed = true;
-						System.out.println("Bad usage: misused bounds flag (err 2)" + usage); 
+						System.out.println("Bad usage: misused bounds flag (err 3)" + usage); 
 						return;
 					}
 				}
 			}
+		}
+		if(bounds[0] == 0 && bounds[1] == 0 && bounds[2] == 0 && bounds[3] == 0 && index_of_focused_mass == -1) {
+			cli_failed = true;
+			System.out.println("Bad usage: missing bounds flag (err 4)" + usage); 
+			return;		
 		}
 		
 		/* OUTPUT FILE FLAG */
@@ -91,8 +114,25 @@ public class Animation_CLI_Main {
 					cli_failed = true;
 					return;
 				}
+				try { 
+					if(!args[i+1].substring(args[i+1].length()-5, args[i+1].length()).equals(".psim") && !(new File(args[i+1])).isFile()) {
+						System.out.println("Bad usage: input file must exist and be *.psim (err 2) " + usage);
+						cli_failed = true;
+						return;
+					}
+				}
+				catch(Exception e) { 
+					System.out.println("Bad usage: misused file input flag (err 3) " + usage);
+					cli_failed = true;
+					return;
+				}
 				simulation_file_path = args[i+1];
 			}
+		}
+		if(simulation_file_path.equals("")) {
+			System.out.println("Bad usage: must use -f to specify input file. (err 4)" + usage);
+			cli_failed = true;
+			return;
 		}
 		
 		/* KEEP INTERMEDIATE FILES FLAG */
@@ -101,6 +141,20 @@ public class Animation_CLI_Main {
 				keep_intermediate_files = true;
 			}
 		}
+		
+	}
+	
+	/**
+	 * 	Usage: physics_animate 
+		  -f <simulation file path>\n
+		  -bounds <x_min>,<y_min>,<x_max>,<y_max> (no spaces) or <focused masses index>\n
+		  -o <output file path> \n 
+		  -k (use flag to keep intermediate files)  \n
+	 */
+	public static void main(String[] args) {
+
+	
+		handleArgs(args);
 		
 		
 		

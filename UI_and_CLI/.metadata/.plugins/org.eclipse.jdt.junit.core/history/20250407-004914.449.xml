@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="AnimationTester" project="Command_Line_Interface" tests="5" started="5" failures="0" errors="1" ignored="0">
+  <testsuite name="cli_testers.AnimationTester" time="0.029" displayname="AnimationTester" uniqueid="[engine:junit-jupiter]/[class:cli_testers.AnimationTester]">
+    <testcase name="functional_test1" classname="cli_testers.AnimationTester" time="0.018" displayname="functional_test1()" uniqueid="[engine:junit-jupiter]/[class:cli_testers.AnimationTester]/[method:functional_test1()]"/>
+    <testcase name="functional_test2" classname="cli_testers.AnimationTester" time="0.002" displayname="functional_test2()" uniqueid="[engine:junit-jupiter]/[class:cli_testers.AnimationTester]/[method:functional_test2()]"/>
+    <testcase name="stress_test_1" classname="cli_testers.AnimationTester" time="0.001" displayname="stress_test_1()" uniqueid="[engine:junit-jupiter]/[class:cli_testers.AnimationTester]/[method:stress_test_1()]"/>
+    <testcase name="stress_test_2" classname="cli_testers.AnimationTester" time="0.004" displayname="stress_test_2()" uniqueid="[engine:junit-jupiter]/[class:cli_testers.AnimationTester]/[method:stress_test_2()]">
+      <error>java.util.InputMismatchException
+	at java.base/java.util.Scanner.throwFor(Scanner.java:947)
+	at java.base/java.util.Scanner.next(Scanner.java:1602)
+	at java.base/java.util.Scanner.nextDouble(Scanner.java:2573)
+	at cli_drivers.Animation_CLI_Main.main(Animation_CLI_Main.java:73)
+	at cli_testers.AnimationTester.stress_test_2(AnimationTester.java:54)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+</error>
+    </testcase>
+    <testcase name="stress_test_3" classname="cli_testers.AnimationTester" time="0.002" displayname="stress_test_3()" uniqueid="[engine:junit-jupiter]/[class:cli_testers.AnimationTester]/[method:stress_test_3()]"/>
+  </testsuite>
+</testrun>

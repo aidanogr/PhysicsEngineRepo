@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="AnimationTester" project="Command_Line_Interface" tests="7" started="7" failures="1" errors="0" ignored="0">
+  <testsuite name="cli_testers.AnimationTester" time="0.034" displayname="AnimationTester" uniqueid="[engine:junit-jupiter]/[class:cli_testers.AnimationTester]">
+    <testcase name="functional_test1" classname="cli_testers.AnimationTester" time="0.02" displayname="functional_test1()" uniqueid="[engine:junit-jupiter]/[class:cli_testers.AnimationTester]/[method:functional_test1()]"/>
+    <testcase name="functional_test2" classname="cli_testers.AnimationTester" time="0.002" displayname="functional_test2()" uniqueid="[engine:junit-jupiter]/[class:cli_testers.AnimationTester]/[method:functional_test2()]"/>
+    <testcase name="stress_test_1" classname="cli_testers.AnimationTester" time="0.002" displayname="stress_test_1()" uniqueid="[engine:junit-jupiter]/[class:cli_testers.AnimationTester]/[method:stress_test_1()]"/>
+    <testcase name="stress_test_2" classname="cli_testers.AnimationTester" time="0.002" displayname="stress_test_2()" uniqueid="[engine:junit-jupiter]/[class:cli_testers.AnimationTester]/[method:stress_test_2()]"/>
+    <testcase name="stress_test_3" classname="cli_testers.AnimationTester" time="0.002" displayname="stress_test_3()" uniqueid="[engine:junit-jupiter]/[class:cli_testers.AnimationTester]/[method:stress_test_3()]"/>
+    <testcase name="stress_test_4" classname="cli_testers.AnimationTester" time="0.002" displayname="stress_test_4()" uniqueid="[engine:junit-jupiter]/[class:cli_testers.AnimationTester]/[method:stress_test_4()]"/>
+    <testcase name="stress_test_5" classname="cli_testers.AnimationTester" time="0.004" displayname="stress_test_5()" uniqueid="[engine:junit-jupiter]/[class:cli_testers.AnimationTester]/[method:stress_test_5()]">
+      <failure>java.lang.AssertionError
+	at cli_testers.AnimationTester.stress_test_5(AnimationTester.java:79)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+</failure>
+    </testcase>
+  </testsuite>
+</testrun>
