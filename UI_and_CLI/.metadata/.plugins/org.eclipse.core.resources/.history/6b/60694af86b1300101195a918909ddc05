@@ -1,0 +1,19 @@
+package cli_testers;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+import cli_drivers.Animation_CLI_Main;
+
+class AnimationTester {
+
+	@Test
+	void test1() {
+		Animation_CLI_Main.main(new String[]{"-f", "Example.psim", "-bounds", "4,4,10,10", "-o", "example.mp4" });
+		assert(Animation_CLI_Main.bounds[0] == 4);
+		assert(Animation_CLI_Main.bounds[1] == 4);
+		assert(Animation_CLI_Main.bounds[2] == 10);
+		assert(Animation_CLI_Main.bounds[3] == 10);
+	}
+}

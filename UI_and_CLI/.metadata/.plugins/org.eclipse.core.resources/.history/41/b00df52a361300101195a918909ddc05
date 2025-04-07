@@ -1,0 +1,17 @@
+package cli_drivers;
+
+public class Animation_CLI_Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		/**
+		 * Usage: physics_animate -f (simulation file path)
+		 * < -bounds (x_min, y_min, x_max, y_max) or -focus_mass (focused masses index) >
+		 * < -o (output file path) > 
+		 * < -k (no additional paramaters, use flag to keep intermediate files)
+		 * 
+		 */
+	}
+
+}

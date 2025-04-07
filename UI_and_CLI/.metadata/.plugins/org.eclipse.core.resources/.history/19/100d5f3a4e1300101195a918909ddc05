@@ -1,0 +1,39 @@
+package cli_drivers;
+
+public class Animation_CLI_Main {
+
+	/**
+	 * Usage: physics_animate -f (simulation file path)
+	 * < -bounds (x_min, y_min, x_max, y_max) or -focus_mass (focused masses index) >
+	 * < -o (output file path) > 
+	 * < -k (no additional paramaters, use flag to keep intermediate files)
+	 * 
+	 */
+	public static void main(String[] args) {
+
+		String usage = """	
+		 Usage: physics_animate -f (simulation file path)\n
+		 < -bounds (x_min, y_min, x_max, y_max) or -focus_mass (focused masses index) >\n
+		 < -o (output file path) >\n 
+		 < -k (no additional paramaters, use flag to keep intermediate files) >\n \n
+	 """;
+		
+		if(args.length < 3) {
+			System.out.println("Bad usage: missing arguments\n" + usage);
+			return;
+		}
+		for(int i = 0; i < args.length; i++) {
+			if(args[i].equals("-bounds")) {
+				if(i + 1 >= args.length) {
+					System.out.println("Bad usage: " + usage);
+				}
+				String bounds = args[i];
+				if(bounds.contains(",")) {
+					Scanner bounds_scanner = new Scanner(bounds);
+					
+				}
+			}
+		}
+	}
+
+}

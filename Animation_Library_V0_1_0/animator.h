@@ -32,7 +32,7 @@ uint8_t initialize_animation(int64_t index_of_focused_mass);
 
 uint8_t set_bounds(double min_x, double min_y, double max_x, double max_y);
 void close_ppm_sim();
-int simulate();
+int animate();
 
 
 

@@ -1,0 +1,14 @@
+package cli_testers;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class AnimationTester {
+
+	@Test
+	void test() {
+		fail("Not yet implemented");
+	}
+
+}

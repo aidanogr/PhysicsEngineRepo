@@ -44,7 +44,7 @@ int main() {
 	printf("error initializing animation: code %d\n", err);
     }
     if(err != 0) return -2;
-    simulate();
+    animate();
 
     //printf("number of masses: %d\n", number_of_masses);
 /*    x_min = -10;

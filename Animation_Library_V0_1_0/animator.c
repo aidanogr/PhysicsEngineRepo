@@ -13,6 +13,8 @@ FILE* sim_file;
 double bounds[4] = {0};
 long int file_size = 0;
 int framerate = 0;
+int timestamps_per_second = 0;
+
 
 /*
  * Must always call this function before using any other animation function calls
@@ -143,11 +145,13 @@ uint8_t initialize_animation(int64_t index_of_focused_mass) {
     assert(sim_file != NULL);
 
     fseek(sim_file, 0, SEEK_END);
+    
     file_size =  ftell(sim_file);
     fseek(sim_file, 0, SEEK_SET);
-
+    
     //TODO check for errors here, EXTREMELY IMPORTANT. ALSO MAKE number_of_masses uint64_t OR SOMETHING
     fread(&number_of_masses, sizeof(int), 1, sim_file);
+
     
     assert(index_of_focused_mass >= -1 && index_of_focused_mass < number_of_masses);
     if(index_of_focused_mass != -1) {
@@ -209,7 +213,8 @@ uint8_t convert_to_mp4() {
     return 0;
 }
 
-int simulate() {
+//@param framerate : pass -1 to let framerate be same resolution as simulation
+int animate() {
 
     simulated_mass_t masses_at_timestamp[number_of_masses];
     int counter = 0;
