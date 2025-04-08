@@ -117,24 +117,74 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named AnimationLibrary
+# Target rules for targets named animation
 
 # Build rule for target.
-AnimationLibrary: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 AnimationLibrary
-.PHONY : AnimationLibrary
+animation: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 animation
+.PHONY : animation
 
 # fast build rule for target.
-AnimationLibrary/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AnimationLibrary.dir/build.make CMakeFiles/AnimationLibrary.dir/build
-.PHONY : AnimationLibrary/fast
+animation/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/animation.dir/build.make CMakeFiles/animation.dir/build
+.PHONY : animation/fast
+
+#=============================================================================
+# Target rules for targets named AnimationLibraryTester
+
+# Build rule for target.
+AnimationLibraryTester: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 AnimationLibraryTester
+.PHONY : AnimationLibraryTester
+
+# fast build rule for target.
+AnimationLibraryTester/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AnimationLibraryTester.dir/build.make CMakeFiles/AnimationLibraryTester.dir/build
+.PHONY : AnimationLibraryTester/fast
+
+#=============================================================================
+# Target rules for targets named Java_CLI
+
+# Build rule for target.
+Java_CLI: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Java_CLI
+.PHONY : Java_CLI
+
+# fast build rule for target.
+Java_CLI/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Java_CLI.dir/build.make CMakeFiles/Java_CLI.dir/build
+.PHONY : Java_CLI/fast
+
+Java_CLI_Handler.o: Java_CLI_Handler.c.o
+.PHONY : Java_CLI_Handler.o
+
+# target to build an object file
+Java_CLI_Handler.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Java_CLI.dir/build.make CMakeFiles/Java_CLI.dir/Java_CLI_Handler.c.o
+.PHONY : Java_CLI_Handler.c.o
+
+Java_CLI_Handler.i: Java_CLI_Handler.c.i
+.PHONY : Java_CLI_Handler.i
+
+# target to preprocess a source file
+Java_CLI_Handler.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Java_CLI.dir/build.make CMakeFiles/Java_CLI.dir/Java_CLI_Handler.c.i
+.PHONY : Java_CLI_Handler.c.i
+
+Java_CLI_Handler.s: Java_CLI_Handler.c.s
+.PHONY : Java_CLI_Handler.s
+
+# target to generate assembly for a file
+Java_CLI_Handler.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Java_CLI.dir/build.make CMakeFiles/Java_CLI.dir/Java_CLI_Handler.c.s
+.PHONY : Java_CLI_Handler.c.s
 
 animator.o: animator.c.o
 .PHONY : animator.o
 
 # target to build an object file
 animator.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AnimationLibrary.dir/build.make CMakeFiles/AnimationLibrary.dir/animator.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/animation.dir/build.make CMakeFiles/animation.dir/animator.c.o
 .PHONY : animator.c.o
 
 animator.i: animator.c.i
@@ -142,7 +192,7 @@ animator.i: animator.c.i
 
 # target to preprocess a source file
 animator.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AnimationLibrary.dir/build.make CMakeFiles/AnimationLibrary.dir/animator.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/animation.dir/build.make CMakeFiles/animation.dir/animator.c.i
 .PHONY : animator.c.i
 
 animator.s: animator.c.s
@@ -150,7 +200,7 @@ animator.s: animator.c.s
 
 # target to generate assembly for a file
 animator.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AnimationLibrary.dir/build.make CMakeFiles/AnimationLibrary.dir/animator.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/animation.dir/build.make CMakeFiles/animation.dir/animator.c.s
 .PHONY : animator.c.s
 
 frame_drawer.o: frame_drawer.c.o
@@ -158,7 +208,7 @@ frame_drawer.o: frame_drawer.c.o
 
 # target to build an object file
 frame_drawer.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AnimationLibrary.dir/build.make CMakeFiles/AnimationLibrary.dir/frame_drawer.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/animation.dir/build.make CMakeFiles/animation.dir/frame_drawer.c.o
 .PHONY : frame_drawer.c.o
 
 frame_drawer.i: frame_drawer.c.i
@@ -166,7 +216,7 @@ frame_drawer.i: frame_drawer.c.i
 
 # target to preprocess a source file
 frame_drawer.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AnimationLibrary.dir/build.make CMakeFiles/AnimationLibrary.dir/frame_drawer.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/animation.dir/build.make CMakeFiles/animation.dir/frame_drawer.c.i
 .PHONY : frame_drawer.c.i
 
 frame_drawer.s: frame_drawer.c.s
@@ -174,7 +224,7 @@ frame_drawer.s: frame_drawer.c.s
 
 # target to generate assembly for a file
 frame_drawer.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AnimationLibrary.dir/build.make CMakeFiles/AnimationLibrary.dir/frame_drawer.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/animation.dir/build.make CMakeFiles/animation.dir/frame_drawer.c.s
 .PHONY : frame_drawer.c.s
 
 main_tester.o: main_tester.c.o
@@ -182,7 +232,7 @@ main_tester.o: main_tester.c.o
 
 # target to build an object file
 main_tester.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AnimationLibrary.dir/build.make CMakeFiles/AnimationLibrary.dir/main_tester.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AnimationLibraryTester.dir/build.make CMakeFiles/AnimationLibraryTester.dir/main_tester.c.o
 .PHONY : main_tester.c.o
 
 main_tester.i: main_tester.c.i
@@ -190,7 +240,7 @@ main_tester.i: main_tester.c.i
 
 # target to preprocess a source file
 main_tester.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AnimationLibrary.dir/build.make CMakeFiles/AnimationLibrary.dir/main_tester.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AnimationLibraryTester.dir/build.make CMakeFiles/AnimationLibraryTester.dir/main_tester.c.i
 .PHONY : main_tester.c.i
 
 main_tester.s: main_tester.c.s
@@ -198,7 +248,7 @@ main_tester.s: main_tester.c.s
 
 # target to generate assembly for a file
 main_tester.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AnimationLibrary.dir/build.make CMakeFiles/AnimationLibrary.dir/main_tester.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AnimationLibraryTester.dir/build.make CMakeFiles/AnimationLibraryTester.dir/main_tester.c.s
 .PHONY : main_tester.c.s
 
 # Help Target
@@ -209,7 +259,12 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... AnimationLibrary"
+	@echo "... AnimationLibraryTester"
+	@echo "... Java_CLI"
+	@echo "... animation"
+	@echo "... Java_CLI_Handler.o"
+	@echo "... Java_CLI_Handler.i"
+	@echo "... Java_CLI_Handler.s"
 	@echo "... animator.o"
 	@echo "... animator.i"
 	@echo "... animator.s"

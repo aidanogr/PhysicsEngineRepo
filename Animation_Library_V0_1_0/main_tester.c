@@ -39,7 +39,7 @@ int main() {
     }
 
 //    set_bounds(6377744.612457, -10, 6378238.000000, 10);
-    err = initialize_animation(0);
+    err = initialize_animation("","","",0);
     if(err != 0) {
 	printf("error initializing animation: code %d\n", err);
     }

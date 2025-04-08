@@ -3,22 +3,37 @@ package cli_drivers;
 import java.io.File;
 import java.util.Scanner;
 
+import java.lang.foreign.*;
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodType;
+import java.nio.charset.StandardCharsets;
+import static java.lang.foreign.ValueLayout.*;
+
+
+
 public class Animation_CLI_Main {
 
-	public static String usage = """	
+	public static final String usage = """	
 	 \nUsage:   physics_animate 
-			  -f <simulation file path>\n
-			  -bounds <x_min>,<y_min>,<x_max>,<y_max> (no spaces) or <focused masses index>\n
-			  -o <output file path> \n 
-			  -k (use flag to keep intermediate files)  \n
+			  -f <simulation file path> *required\n
+			  -bounds <x_min>,<y_min>,<x_max>,<y_max> (no spaces) or <focused masses index> *required\n
+			  -o <output file path> *defaults to ~/Documents/Animation/output.mp4, currently must output an mp4,\n 
+			  -k (use flag to keep intermediate files)  *defaults to false\n
 		 """;
 	
+	
+	public static final String ANIMATION_LIBRARY_PATH = 
+			"/Users/aidanogrady/Documents/GitHub/PhysicsEngineRepo/Animation_Library_V0_1_0/build_files/libjava_cli_handler.dylib";
+	//Path issues arise when using java as interface; //TODO make this programatic
+	public static final String FFMPEG_EXECUTABLE_PATH = "/Users/homebrew/bin/ffmpeg";
+
 	
 	
 	public static String simulation_file_path = "";
 	public static int index_of_focused_mass = -1;
 	public static double[] bounds = {0,0,0,0};
-	public static String path_to_output_file = "output.mp4";
+	public static String path_to_output_file = System.getenv().get("HOME") + "/Documents/Animations/output.mp4";
+	public static String directory_to_output_file = System.getenv("HOME") + "/Documents/Animations";
 	public static boolean keep_intermediate_files = false;
 	
 	public static boolean cli_failed = false;
@@ -34,11 +49,72 @@ public class Animation_CLI_Main {
 		bounds[1] = 0;
 		bounds[2] = 0;
 		bounds[3] = 0;
-		path_to_output_file = "output.mp4";
+
+	    path_to_output_file = "~/Documents/Animations/output.mp4";
+	    directory_to_output_file = "~/Documents/Animations";
 		keep_intermediate_files = false;
 		cli_failed = false;
 	}
 	
+	
+	static final Linker linker = Linker.nativeLinker();
+	
+	
+	/**
+	 * 
+	 * @param path MUST NOT BE FILE, SHOULD BE TRUE PATH TO DIRECTORY ONLY
+	 * @return
+	 */
+	public static int createDirectoriesToPath(String directoryPath) {
+		File f = new File(directoryPath);
+		try {
+			System.out.println(f.exists());
+			if(!f.exists()) {
+				if(!f.mkdirs()) throw new Exception();
+			}
+			else return 0;
+		}
+		catch(Exception e) {
+			System.err.println("Error creating directories\n");
+			e.printStackTrace();
+			return -1;
+		}
+		return 0;
+		
+	}
+
+	/**
+	 * uses values gathered from CLI flags and calls the animation library's entry method
+	 * @return value returned by animtor's entry
+	 * @throws Throwable if arena fails to initialize
+	 */
+	public static int invokeAnimationEntry() throws Throwable {
+	        
+	       
+		try (Arena arena = Arena.ofConfined()) {
+			//create "pointers" from strings 
+			MemorySegment inputStr = arena.allocateFrom(simulation_file_path);
+			MemorySegment outputDirStr = arena.allocateFrom(directory_to_output_file);
+			MemorySegment outputStr = arena.allocateFrom(path_to_output_file);
+			MemorySegment boundsArray = arena.allocateFrom(JAVA_DOUBLE, bounds);
+
+			//convert from boolean to byte
+			byte keepIntermediateFiles; 
+			if(keep_intermediate_files) keepIntermediateFiles = (byte) 1;
+			else keepIntermediateFiles = (byte) 0;
+
+			//create entry (to animator) MethodHandle reference via animation C library
+			SymbolLookup animLib = SymbolLookup.libraryLookup(ANIMATION_LIBRARY_PATH, arena);
+			MemorySegment entryAddress = animLib.find("entry").get(); 
+			FunctionDescriptor entrySignature = FunctionDescriptor.of(ValueLayout.JAVA_INT, ValueLayout.ADDRESS, ValueLayout.ADDRESS,
+					ValueLayout.ADDRESS, JAVA_INT, ValueLayout.ADDRESS, JAVA_BYTE);
+			MethodHandle entry = linker.downcallHandle(entryAddress, entrySignature);
+
+			//call entry and return animator's return value
+			return (int) entry.invokeExact(inputStr, outputDirStr, outputStr,
+									index_of_focused_mass, boundsArray, keepIntermediateFiles);
+		}
+	}
 	
 	//sets state variables based on commmand line arguments 
 	public static void handleArgs(String[] args) {
@@ -103,6 +179,16 @@ public class Animation_CLI_Main {
 					return;
 				}
 				path_to_output_file = args[i+1];
+				try {
+					directory_to_output_file = path_to_output_file.substring(0, path_to_output_file.lastIndexOf('/'));
+					
+				}
+				catch(Exception e) {
+					System.out.println("Bad usage: output file must contain \"/\" (e.g ./output.mp4) (err 2)" + usage);
+					cli_failed = true;
+					return;
+				}
+				break;
 			}
 		}
 		
@@ -144,23 +230,42 @@ public class Animation_CLI_Main {
 		
 	}
 	
+	
+	
 	/**
-	 * 	Usage: physics_animate 
-		  -f <simulation file path>\n
-		  -bounds <x_min>,<y_min>,<x_max>,<y_max> (no spaces) or <focused masses index>\n
-		  -o <output file path> \n 
-		  -k (use flag to keep intermediate files)  \n
+	 * see {@link Animation_CLI_Main#usage} for usage
 	 */
 	public static void main(String[] args) {
-
 	
+		/*System.out.println(System.getenv("PATH"));
+		for(String s : args) {
+			System.out.println(s);
+		}*/
+		System.out.println(System.getenv().get("HOME"));
+		
 		handleArgs(args);
+
+		if(createDirectoriesToPath(directory_to_output_file) != 0) {
+			cli_failed = true;
+			System.out.println("error creating directory(s) to output");
+		}
+		if(cli_failed) {
+			System.err.println("\nCli failure, animator not invoked");
+			return;
+		}
+		try {
+			invokeAnimationEntry();
+		}
+		catch (Throwable e) {
+			System.err.println("Error while invoking animation library\n");
+			e.printStackTrace();
+			System.err.println("\nArena failed to initialize\n");
+		}
 		
 		
-		
-		System.out.println("Output file: " + path_to_output_file + "\nbounds (x,y,x,y): " + bounds[0] + ',' +bounds[1]
+/*		System.out.println("Output file: " + path_to_output_file + "\nbounds (x,y,x,y): " + bounds[0] + ',' +bounds[1]
 				+ ',' + bounds[2] + ',' + bounds[3] + 
-				"\nSelected mass: " + index_of_focused_mass);
+				"\nSelected mass: " + index_of_focused_mass); */
 		
 	}
 

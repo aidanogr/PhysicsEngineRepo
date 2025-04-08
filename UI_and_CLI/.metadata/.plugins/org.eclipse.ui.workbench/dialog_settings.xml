@@ -2,9 +2,9 @@
 <section name="Workbench">
 	<section name="WorkbenchPreferenceDialog.dialogBounds">
 		<item key="DIALOG_X_ORIGIN" value="411"/>
-		<item key="DIALOG_Y_ORIGIN" value="42"/>
+		<item key="DIALOG_Y_ORIGIN" value="0"/>
 		<item key="DIALOG_WIDTH" value="901"/>
-		<item key="DIALOG_HEIGHT" value="701"/>
+		<item key="DIALOG_HEIGHT" value="805"/>
 		<item key="DIALOG_FONT_NAME" value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont"/>
 	</section>
 	<section name="org.eclipse.ui.preferences.keysPreferencePage">

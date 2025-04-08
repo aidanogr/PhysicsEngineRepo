@@ -13,6 +13,6 @@
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
     <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="cli_drivers.Animation_CLI_Main"/>
     <stringAttribute key="org.eclipse.jdt.launching.MODULE_NAME" value="Command_Line_Interface"/>
-    <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-bounds 0 -o testOutput.mp4"/>
+    <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-bounds 0  -f /Users/aidanogrady/Documents/GitHub/PhysicsEngineRepo/Physics_Engine_v0_0_1/Simulations/Earth_Human_Gravity.psim"/>
     <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="Command_Line_Interface"/>
 </launchConfiguration>

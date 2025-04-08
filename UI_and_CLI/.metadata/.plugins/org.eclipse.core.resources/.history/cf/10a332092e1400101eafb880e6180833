@@ -1,0 +1,24 @@
+package cli_drivers;
+
+import java.io.File;
+import java.util.Scanner;
+
+public class ConfigReader {
+
+	public static final String PATH_TO_CONFIG_FILE = "../../../../.config";
+	private Scanner configScanner;
+	
+	private ConfigReader(File config_file) {
+		configScanner = new Scanner(PATH_TO_CONFIG_FILE);
+	}
+
+	
+	public static createConfigReader() throws Exception {
+		File f = new File(PATH_TO_CONFIG_FILE);
+		if(!f.isFile()) {
+			System.err.println("config file not found, try a fresh installation");
+			throw new Exception();
+		}
+	}
+
+}

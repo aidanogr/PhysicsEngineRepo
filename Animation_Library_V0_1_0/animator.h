@@ -27,12 +27,13 @@ typedef struct {
 
 
 
-uint8_t open_ppm_sim(char* filename);
-uint8_t initialize_animation(int64_t index_of_focused_mass);
+int8_t open_ppm_sim(char* filename);
 
-uint8_t set_bounds(double min_x, double min_y, double max_x, double max_y);
+int8_t initialize_animation(char* ppm_sim_path, char* _output_file_path, char* _output_file_dir, int64_t index_of_focused_mass);
+
+int8_t set_bounds(double min_x, double min_y, double max_x, double max_y);
 void close_ppm_sim();
-int animate();
+int8_t animate();
 
 
 

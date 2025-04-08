@@ -32,7 +32,7 @@ int y_axis_column = -1;
 //each bit represents a state. Set in draw_axis(), used in draw_tic_marks() to avoid weird behavior when
 //picture does not show the origin.
 //[reserved..(always zero)][y_min>=0][y_max<=0][x_min>=0][x_max<=0]
-uint8_t boundary_flags = 0b0;
+int8_t boundary_flags = 0b0;
 
 
 
@@ -62,7 +62,7 @@ int set_pixel_RGB(int y, int x, uint8_t RED, uint8_t BLUE, uint8_t GREEN) {
  * background color is black by default (0,0,0).
  * Note: must call this function immediately after initialize_frame()
  */
-uint8_t change_background_color(uint8_t RED, uint8_t BLUE, uint8_t GREEN) {
+int8_t change_background_color(uint8_t RED, uint8_t BLUE, uint8_t GREEN) {
 
     for(int y = 0; y < HEIGHT; y++) {
 	for(int x = 0; x < WIDTH; x++) {
@@ -82,7 +82,7 @@ uint8_t change_background_color(uint8_t RED, uint8_t BLUE, uint8_t GREEN) {
  * @return -1 if bounds have bad shape (x_min >= x_max or y_min >= y_max)
  * @return -2 if WIDTH <= 0 or HEIGHT <= 0
  */
-uint8_t initialize_frame(double x_min_temp, double y_min_temp, double x_max_temp, double y_max_temp, int number_of_masses_temp) {
+int8_t initialize_frame(double x_min_temp, double y_min_temp, double x_max_temp, double y_max_temp, int number_of_masses_temp) {
     if(x_min_temp >= x_max_temp || y_min_temp >= y_max_temp) {
 	return -1;
     }
@@ -129,10 +129,10 @@ void change_coordinate_system_color(uint8_t RED, uint8_t GREEN, uint8_t BLUE) {
  * @return 0 if file saved successfully
  * @return -1 if unsuccessful
  */
-uint8_t save_ppm(const char *filename, uint8_t image[HEIGHT][WIDTH][3]) {
+int8_t save_ppm(const char *filename, uint8_t image[HEIGHT][WIDTH][3]) {
     FILE *fp = fopen(filename, "wb");
     if (!fp) {
-        printf("Failed to open file for writing.\n");
+        printf("Failed to open file for writing: %s\n", filename);
         return -1;
     }
     fprintf(fp, "P6\n%d %d\n255\n", WIDTH, HEIGHT);
@@ -151,9 +151,9 @@ uint8_t save_ppm(const char *filename, uint8_t image[HEIGHT][WIDTH][3]) {
  * @return 0 if successful
  * @return -1 if unsuccessful, mapped_coordinate
  */
-uint8_t map_coordinate_to_pixel(double coordinate_x, double coordinate_y) {
+int8_t map_coordinate_to_pixel(double coordinate_x, double coordinate_y) {
     if(coordinate_y < y_min || coordinate_y > y_max || coordinate_x < x_min || coordinate_x > x_max) {
-	printf("Tried to map coordinate outside of range: y:%.2f, x:%.2f\n", coordinate_y, coordinate_x);
+	//printf("Tried to map coordinate outside of range: y:%.2f, x:%.2f\n", coordinate_y, coordinate_x);
   	return -1;
     }
     mapped_coordinate[0] = (int) ((coordinate_x - x_min) / delta_width);
@@ -173,7 +173,7 @@ uint8_t map_coordinate_to_pixel(double coordinate_x, double coordinate_y) {
  * @param delta : coordinate difference between tic marks (not pixel difference) 
  * @return //TODO does this need a return?
 */
-uint8_t draw_tic_marks(int tic_width_horizontal_percentage, int tic_width_vertical_percentage, double delta) {
+int8_t draw_tic_marks(int tic_width_horizontal_percentage, int tic_width_vertical_percentage, double delta) {
 
     int tic_width_horizontal = (int) (0.01 * tic_width_horizontal_percentage * WIDTH);
     int tic_width_vertical = (int) (0.01 * tic_width_vertical_percentage * HEIGHT);
@@ -283,7 +283,7 @@ void draw_axis() {
  * @return 0 if successful
  * @return -1 if drawn outside range
  */
-uint8_t draw_point_mass_by_pixel(uint8_t RED, uint8_t GREEN, uint8_t BLUE, int position_x, int position_y) {
+int8_t draw_point_mass_by_pixel(uint8_t RED, uint8_t GREEN, uint8_t BLUE, int position_x, int position_y) {
 	if (!(position_x < 0 || position_x > WIDTH-1 || position_y < 0 || position_y > HEIGHT-1)) {
 		set_pixel_RGB(position_y, position_x, RED, GREEN, BLUE);
 		return 0;
@@ -304,7 +304,7 @@ uint8_t draw_point_mass_by_pixel(uint8_t RED, uint8_t GREEN, uint8_t BLUE, int p
  * @return 0 if successful
  * @return -1 if outside range, mass is not drawn
  */
-uint8_t draw_point_mass_by_coordinate(uint8_t RED, uint8_t GREEN, uint8_t BLUE, double position_x, double position_y) {
+int8_t draw_point_mass_by_coordinate(uint8_t RED, uint8_t GREEN, uint8_t BLUE, double position_x, double position_y) {
 	map_coordinate_to_pixel(position_x, position_y);
 	return draw_point_mass_by_pixel(RED, GREEN, BLUE, mapped_coordinate[0], mapped_coordinate[1]);
 }
@@ -314,7 +314,7 @@ uint8_t draw_point_mass_by_coordinate(uint8_t RED, uint8_t GREEN, uint8_t BLUE, 
  * iterates through square drawn out by radius and draws if (x-x1)^2 + (y-y1)^2 < radius
  * uses draw_point_mass_by_pixel()
  */
-uint8_t draw_large_mass(uint8_t radius, uint8_t RED, uint8_t GREEN, uint8_t BLUE, double position_x, double position_y) {
+int8_t draw_large_mass(uint8_t radius, uint8_t RED, uint8_t GREEN, uint8_t BLUE, double position_x, double position_y) {
     map_coordinate_to_pixel(position_x, position_y);
     int mapped_x = mapped_coordinate[0];
     int mapped_y = mapped_coordinate[1];

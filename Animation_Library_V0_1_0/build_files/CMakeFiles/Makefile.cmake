@@ -48,5 +48,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/AnimationLibrary.dir/DependInfo.cmake"
+  "CMakeFiles/animation.dir/DependInfo.cmake"
+  "CMakeFiles/AnimationLibraryTester.dir/DependInfo.cmake"
+  "CMakeFiles/Java_CLI.dir/DependInfo.cmake"
   )

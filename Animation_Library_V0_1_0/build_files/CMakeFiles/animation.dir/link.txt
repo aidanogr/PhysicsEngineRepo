@@ -1,0 +1,2 @@
+/usr/bin/ar qc libanimation.a CMakeFiles/animation.dir/frame_drawer.c.o CMakeFiles/animation.dir/animator.c.o
+/usr/bin/ranlib libanimation.a
