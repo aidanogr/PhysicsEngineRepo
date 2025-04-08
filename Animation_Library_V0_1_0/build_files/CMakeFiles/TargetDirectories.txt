@@ -1,5 +1,0 @@
-/Users/aidanogrady/Documents/GitHub/PhysicsEngineRepo/Animation_Library_V0_1_0/build_files/CMakeFiles/animation.dir
-/Users/aidanogrady/Documents/GitHub/PhysicsEngineRepo/Animation_Library_V0_1_0/build_files/CMakeFiles/AnimationLibraryTester.dir
-/Users/aidanogrady/Documents/GitHub/PhysicsEngineRepo/Animation_Library_V0_1_0/build_files/CMakeFiles/Java_CLI.dir
-/Users/aidanogrady/Documents/GitHub/PhysicsEngineRepo/Animation_Library_V0_1_0/build_files/CMakeFiles/edit_cache.dir
-/Users/aidanogrady/Documents/GitHub/PhysicsEngineRepo/Animation_Library_V0_1_0/build_files/CMakeFiles/rebuild_cache.dir

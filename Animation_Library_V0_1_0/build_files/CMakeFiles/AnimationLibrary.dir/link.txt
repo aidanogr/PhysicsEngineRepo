@@ -1,1 +1,0 @@
-/usr/bin/cc -g -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/AnimationLibrary.dir/frame_drawer.c.o CMakeFiles/AnimationLibrary.dir/animator.c.o CMakeFiles/AnimationLibrary.dir/main_tester.c.o -o AnimationLibrary

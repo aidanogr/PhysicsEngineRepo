@@ -1,1 +1,0 @@
-/usr/bin/cc -g -arch arm64 -dynamiclib -Wl,-headerpad_max_install_names -o libjava_cli_handler.dylib -install_name @rpath/libjava_cli_handler.dylib CMakeFiles/Java_CLI.dir/Java_CLI_Handler.c.o  libanimation.a

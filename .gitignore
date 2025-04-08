@@ -1,3 +1,6 @@
 *.DS_Store
 *.ppm
 *.swp
+*.o
+
+/build_files/
