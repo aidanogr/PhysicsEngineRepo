@@ -1,6 +1,6 @@
-*.DS_Store
-*.ppm
-*.swp
-*.o
+**.DS_Store
+**.ppm
+**.swp
+**.o
 
-/build_files/
+**/build_files/
